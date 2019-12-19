@@ -1,0 +1,54 @@
+Dependencies for Project 'LAB_011', Target 'NXP LPC4088': (DO NOT MODIFY !)
+F (.\main.c)(0x5DF9BFF7)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DCORE_M4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F137E)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h)(0x5A55DC32)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F137C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F137C)
+I (Library/Serial.h)(0x5DF9C014)
+I (Library/SystemStructures.h)(0x5A0DD23D)
+I (Library/HM10.h)(0x5DF92B0A)
+F (.\Library\SystemStructures.h)(0x5A0DD23D)()
+F (.\Library\Serial.c)(0x5DF9C10F)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DCORE_M4-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
+I (Library\Serial.h)(0x5DF9C014)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F137E)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h)(0x5A55DC32)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
+I (Library\SystemStructures.h)(0x5A0DD23D)
+F (.\Library\HM10.c)(0x5DF92C8E)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DCORE_M4-o .\objects\hm10.o --omf_browse .\objects\hm10.crf --depend .\objects\hm10.d)
+I (Library\HM10.h)(0x5DF92B0A)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F137E)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h)(0x5A55DC32)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
+I (Library\Serial.h)(0x5DF9C014)
+I (Library\SystemStructures.h)(0x5A0DD23D)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F137C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F137C)
+F (RTE\Device\LPC4088FET208\RTE_Device.h)(0x568E1928)()
+F (RTE\Device\LPC4088FET208\startup_LPC407x_8x_177x_8x.s)(0x4FB9D5EE)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include--pd "__UVISION_VERSION SETA 525" --pd "_RTE_ SETA 1" --pd "CORE_M4 SETA 1"--list .\listings\startup_lpc407x_8x_177x_8x.lst --xref -o .\objects\startup_lpc407x_8x_177x_8x.o --depend .\objects\startup_lpc407x_8x_177x_8x.d)
+F (RTE\Device\LPC4088FET208\system_LPC407x_8x_177x_8x.c)(0x582D7608)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DCORE_M4-o .\objects\system_lpc407x_8x_177x_8x.o --omf_browse .\objects\system_lpc407x_8x_177x_8x.crf --depend .\objects\system_lpc407x_8x_177x_8x.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F137E)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h)(0x5A55DC32)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h)(0x5A8E6632)
+I (C:\Keil_v5\ARM\PACK\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
+I (RTE\Device\LPC4088FET208\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
+F (RTE\Device\LPC4088FET208\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)()

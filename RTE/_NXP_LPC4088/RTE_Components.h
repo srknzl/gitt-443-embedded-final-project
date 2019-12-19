@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'Project_Gitt' 
- * Target:  'Project_Gitt' 
+ * Project: 'ProjectGitt' 
+ * Target:  'NXP LPC4088' 
  */
 
 #ifndef RTE_COMPONENTS_H

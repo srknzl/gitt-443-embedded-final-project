@@ -1,31 +1,46 @@
 #include "LPC407x_8x_177x_8x.h"
 
-static uint32_t bluetooth;
-static uint32_t blRead;
-static uint32_t lumens;
-static uint32_t distance;
-static uint32_t distanceRead;
-static uint32_t LDRRead;
-static uint32_t LDRData;
+#include <stdio.h> 
+#include <string.h> 
 
-void init() {
+#include "Library/Serial.h"
+#include "Library/HM10.h"
 
-}
+char received[100]; 
 
-void update(){
-	if(blRead){
-		
-	}
-	if(distanceRead){
+void init() {	
+	Serial_Init();
+	//serialTransmitData = "Selam bro";
+	//Serial_SendData();
 	
+	HM10_Init();
+}
+
+void update() {
+	/*
+	while(*serialTransmitData){
+			Serial_WriteData(*serialTransmitData++);
+			while(!serialTransmitCompleted);
 	}
-	if(LDRRead) {
-		
+	// */
+	if(serialNewDataAvailable){
+		serialNewDataAvailable = 0;
+		if(serialReceivedCharacter == '\r'){
+			serialTransmitData = received;
+			strncat(serialTransmitData, "\r\n", 2);
+			Serial_SendData();
+			strcpy(received ,"");
+		}else{
+			strncat(received, &serialReceivedCharacter, 1);
+		}
 	}
 }
-int main(){
+
+int main() {
 	init();
-	while(1){
+	
+	while(1) {
 		update();
-	}	
+	}
 }
+
