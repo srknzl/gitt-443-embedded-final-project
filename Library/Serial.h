@@ -69,5 +69,7 @@ void Serial_Init(void);
 char Serial_ReadData(void);
 void Serial_WriteData(char data);
 void Serial_SendData(void);
-
+uint8_t Serial_ResponseReceived(void);
+void Serial_ForwardToHM10(char *);
+void Serial_SendStringWithoutCRLN(char *);
 #endif

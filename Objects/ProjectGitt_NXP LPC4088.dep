@@ -1,6 +1,6 @@
 Dependencies for Project 'ProjectGitt', Target 'NXP LPC4088': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\main.c)(0x5DFCA6F0)(-c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DCORE_M4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x5DFCFECB)(-c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DCORE_M4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
 I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25D706)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B1868)
@@ -11,12 +11,12 @@ I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu
 I (C:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B186A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B1868)
-I (Library/Serial.h)(0x5DFBE1E2)
+I (Library/Serial.h)(0x5DFCFE59)
 I (Library/SystemStructures.h)(0x5A0DD23C)
-I (Library/HM10.h)(0x5DF92B0A)
+I (Library/HM10.h)(0x5DFCFB9C)
 F (.\Library\SystemStructures.h)(0x5A0DD23C)()
-F (.\Library\Serial.c)(0x5DFC9072)(-c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DCORE_M4-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
-I (Library\Serial.h)(0x5DFBE1E2)
+F (.\Library\Serial.c)(0x5DFCFE4E)(-c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DCORE_M4-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
+I (Library\Serial.h)(0x5DFCFE59)
 I (C:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
 I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25D706)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B1868)
@@ -26,8 +26,11 @@ I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cms
 I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F9424)
 I (C:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
 I (Library\SystemStructures.h)(0x5A0DD23C)
-F (.\Library\HM10.c)(0x5DFCA302)(-c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DCORE_M4-o .\objects\hm10.o --omf_browse .\objects\hm10.crf --depend .\objects\hm10.d)
-I (Library\HM10.h)(0x5DF92B0A)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B1868)
+I (Library\HM10.h)(0x5DFCFB9C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B186A)
+F (.\Library\HM10.c)(0x5DFCFB8D)(-c --cpu Cortex-M4.fp.sp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\LPC4088FET208-I.\RTE\_NXP_LPC4088-IC:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DCORE_M4-o .\objects\hm10.o --omf_browse .\objects\hm10.crf --depend .\objects\hm10.d)
+I (Library\HM10.h)(0x5DFCFB9C)
 I (C:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include\LPC407x_8x_177x_8x.h)(0x539FDB22)
 I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25D706)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B1868)
@@ -36,7 +39,7 @@ I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cms
 I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25D706)
 I (C:\Users\serka\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu_armv7.h)(0x5C8F9424)
 I (C:\Users\serka\AppData\Local\Arm\Packs\Keil\LPC4000_DFP\2.1.0\Device\Include\system_LPC407x_8x_177x_8x.h)(0x5703A0AE)
-I (Library\Serial.h)(0x5DFBE1E2)
+I (Library\Serial.h)(0x5DFCFE59)
 I (Library\SystemStructures.h)(0x5A0DD23C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B186A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B1868)

@@ -1,4 +1,6 @@
 #include "Serial.h"
+#include "string.h"
+#include "HM10.h"
 
 char serialReceivedCharacter = 0;
 uint8_t serialNewDataAvailable = 0;
@@ -82,4 +84,30 @@ void Serial_SendData(){
 		while(!serialTransmitCompleted);
 	}
 }
+/*
+Indicates if response character sequence is ended. Last character is always \r in putty.
+which is sent when enter key is pressed.
+*/
+uint8_t Serial_ResponseReceived(){
+	return serialReceivedCharacter == '\r';
+}
+/*
+Sends data to HM10.
+- data does not include \r\n, so we append it manually.
 
+*/
+void Serial_ForwardToHM10(char * data){
+		strncat(data, "\r\n", 2);
+		HM10_SendCommand(data);
+}
+
+
+/*
+	Writes string to uart
+- Data does not include \r\n so we append manually.
+*/
+void Serial_SendStringWithoutCRLN(char * data){
+	strncat(data, "\r\n", 2);
+	serialTransmitData = data;
+	Serial_SendData();
+}

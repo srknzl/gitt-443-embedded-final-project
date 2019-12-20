@@ -6,45 +6,29 @@
 #include "Library/Serial.h"
 #include "Library/HM10.h"
 
-char received[100]; 
+char serialReceived[256]; 
 char receivedBlue[256];
 
 void init() {	
 	Serial_Init();
-	//serialTransmitData = "Selam bro";
-	//Serial_SendData();
-	
 	HM10_Init();
-	//HM10_SendCommand("AT\r\n");
 }
 
 void update() {
-	/*
-	while(*serialTransmitData){
-			Serial_WriteData(*serialTransmitData++);
-			while(!serialTransmitCompleted);
-	}
-	// */
 	if(serialNewDataAvailable){
 		serialNewDataAvailable = 0;
-		if(serialReceivedCharacter == '\r'){
-			serialTransmitData = received;
-			strncat(received, "\r\n", 2);
-			HM10_SendCommand(received);  // Upon Received a enter send the word to hm10 
-			//Serial_SendData();
-			memset(received, 0, 100); // empty received
+		if(Serial_ResponseReceived()){ // if last received character is \r
+				Serial_ForwardToHM10(serialReceived);
+			  //Serial_SendStringWithoutCRLN(serialReceived);
+				memset(serialReceived, 0, 256); // empty serialReceived buffer for avoiding accumulation
 		}else{
-			strncat(received, &serialReceivedCharacter, 1);
+			strncat(serialReceived, &serialReceivedCharacter, 1); // If not append to form complete response
 		}
 	}
 	if(HM10NewDataAvailable){
-		HM10NewDataAvailable = 0; 
-		if(HM10Buffer[HM10CurrentBufferIndex-1] == '\n'){ // If last character was \n the response finished
-			strcpy(receivedBlue, HM10Buffer); // Copy the response 
-			HM10_ClearBuffer(); 
-			serialTransmitData = receivedBlue; // set response to be transmitted to putty via uart
-			Serial_SendData();
-			memset(received, 0, 256); // empty received
+		HM10NewDataAvailable = 0;
+		if(HM10_ResponseReceived()){  // if last received character is \n
+			HM10_SendResponseToUart();
 		}
 	}
 }

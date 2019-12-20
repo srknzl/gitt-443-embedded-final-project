@@ -62,6 +62,20 @@ void HM10_Write(char* data) {
 	}
 }
 
+// Handles received response that is inside the buffer.
+void HM10_SendResponseToUart(){
+		serialTransmitData = HM10Buffer; // Transmit the response to uart
+		Serial_SendData();
+		HM10_ClearBuffer(); 
+}
+// Communication protocol.
+void HM10_ProcessResponse(){
+		
+}
+uint8_t HM10_ResponseReceived(){
+	return HM10Buffer[HM10CurrentBufferIndex-1] == '\n';
+}
+
 void UART3_IRQHandler() {
 	char data;
 	data = HM10_ReadData();
@@ -69,4 +83,5 @@ void UART3_IRQHandler() {
 	HM10CurrentBufferIndex++;
 	HM10NewDataAvailable = 1;
 }
+
 
