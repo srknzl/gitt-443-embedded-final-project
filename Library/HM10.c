@@ -97,6 +97,9 @@ void HM10_ProcessResponse(DeviceStatus* status){
 		}else if(strcmp(HM10Buffer,"STOP\r\n")==0){
 			HM10_SendCommand("STOP");
 			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"START\r\n")==0){
+			HM10_SendCommand("START");
+			HM10_SendCRLN();
 		}else if(strcmp(HM10Buffer,"AUTO\r\n")==0){
 			HM10_SendCommand("AUTO");
 			HM10_SendCRLN();
