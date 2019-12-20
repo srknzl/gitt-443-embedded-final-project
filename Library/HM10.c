@@ -76,35 +76,56 @@ void HM10_SendResponseToUart(){
 		Serial_SendData(); 
 }
 // Communication protocol.
-
-/*
-
-
-*/
-void HM10_ProcessResponse(DeviceStatus status){
+void HM10_ProcessResponse(DeviceStatus* status){
 		if(strcmp(HM10Buffer,"STATUS\r\n")==0){
 			HM10_SendCommand("STATUS");
 			HM10_SendCRLN();
 			HM10_SendCommand(getStatusString(status));
 			HM10_SendCRLN();
-		}else if(strcmp(HM10Buffer,"STATUS\r\n")==0){
-			
-		}else if(strcmp(HM10Buffer,"STATUS\r\n")==0){
-			
-		}else if(strcmp(HM10Buffer,"STATUS\r\n")==0){
-			
+		}else if(strcmp(HM10Buffer,"LEFT\r\n")==0){
+			HM10_SendCommand("LEFT");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"RIGHT\r\n")==0){
+			HM10_SendCommand("RIGHT");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"FORWARD\r\n")==0){
+			HM10_SendCommand("FORWARD");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"BACK\r\n")==0){
+			HM10_SendCommand("BACK");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"STOP\r\n")==0){
+			HM10_SendCommand("STOP");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"AUTO\r\n")==0){
+			HM10_SendCommand("AUTO");
+			HM10_SendCRLN();
+			HM10_SendCommand("AUTONOMOUS");
+			HM10_SendCRLN();
+			status->opmode = "AUTO";
+		}else if(strcmp(HM10Buffer,"TEST\r\n")==0){
+			HM10_SendCommand("TEST");
+			HM10_SendCRLN();
+			HM10_SendCommand("TESTING");
+			HM10_SendCRLN();
+			status->opmode = "TEST";
 		}
 }
 void HM10_SendCRLN(){
 	HM10_SendCommand("\r\n");
 }
-char* getStatusString(DeviceStatus status){
+
+/*
+Given status returns a json formatted string that represents the current status of the car
+
+*/
+char* getStatusString(DeviceStatus* status){
 	//{"distance":5,"light_level_left":150,"light_level_right":200,"op_mode":"AUTO"}
 	snprintf(statusString, 120, "{\"distance\":%u,\"light_level_left\":%u,\"light_level_right\":%u,\"op_mode\":\"%s\"}", 
-	status.distance,
-	status.lightLevelLeft,
-	status.lightLevelRight,
-	status.opmode);
+	status->distance,
+	status->lightLevelLeft,
+	status->lightLevelRight,
+	status->opmode);
 	return statusString;
 }
 

@@ -9,9 +9,6 @@
 char serialReceived[256]; 
 char receivedBlue[256];
 DeviceStatus status;
-uint32_t distance;
-uint16_t lightLevelLeft, lightLevelRight;
-char * opmode;
 
 
 void init() {	
@@ -27,8 +24,8 @@ void update() {
 	if(serialNewDataAvailable){
 		serialNewDataAvailable = 0;
 		if(Serial_ResponseReceived()){ // if last received character is \r
-				Serial_ForwardToHM10(serialReceived);
-			  //Serial_SendStringWithoutCRLN(serialReceived);
+				Serial_SendCRLN();
+				Serial_SendString(serialReceived);
 				memset(serialReceived, 0, 256); // empty serialReceived buffer for avoiding accumulation
 		}else{
 			strncat(serialReceived, &serialReceivedCharacter, 1); // If not append to form complete response
@@ -38,7 +35,7 @@ void update() {
 		HM10NewDataAvailable = 0;
 		if(HM10_ResponseReceived()){  // if last received character is \n
 			HM10_SendResponseToUart();
-			HM10_ProcessResponse(status);
+			HM10_ProcessResponse(&status);
 			HM10_ClearBuffer();
 		}
 	}

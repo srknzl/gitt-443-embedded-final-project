@@ -32,10 +32,10 @@ void HM10_ClearBuffer(void);
 char HM10_ReadData(void);
 void HM10_WriteData(char data);
 void HM10_Write(char* data);
-void HM10_ProcessResponse(DeviceStatus);
+void HM10_ProcessResponse(DeviceStatus*);
 void HM10_SendResponseToUart(void);
 uint8_t HM10_ResponseReceived(void);
-char* getStatusString(DeviceStatus);
+char* getStatusString(DeviceStatus*);
 void HM10_SendCRLN(void);
 
 

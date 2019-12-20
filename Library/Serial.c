@@ -91,23 +91,13 @@ which is sent when enter key is pressed.
 uint8_t Serial_ResponseReceived(){
 	return serialReceivedCharacter == '\r';
 }
-/*
-Sends data to HM10.
-- data does not include \r\n, so we append it manually.
 
-*/
-void Serial_ForwardToHM10(char * data){
-		strncat(data, "\r\n", 2);
-		HM10_SendCommand(data);
+void Serial_SendCRLN(){
+	serialTransmitData = "\r\n";
+	Serial_SendData();
 }
 
-
-/*
-	Writes string to uart
-- Data does not include \r\n so we append manually.
-*/
-void Serial_SendStringWithoutCRLN(char * data){
-	strncat(data, "\r\n", 2);
+void Serial_SendString(char * data){
 	serialTransmitData = data;
 	Serial_SendData();
 }
