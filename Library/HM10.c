@@ -1,4 +1,5 @@
 #include "HM10.h"
+#include "math.h"
 
 uint8_t HM10CurrentBufferIndex = 0;
 uint8_t HM10NewDataAvailable = 0;
@@ -42,8 +43,14 @@ void HM10_SendCommand(char* command) {
 }
 
 void HM10_ClearBuffer() {
+	uint32_t length;
 	HM10CurrentBufferIndex = 0;
-	strcpy(HM10Buffer,"");	
+	length = strlen(HM10Buffer);
+	if (length < HM10BufferSize){  // If length is less than buffer size memset may not write 0 to all the buffer.
+			memset(HM10Buffer,0, length);
+	}else{
+			memset(HM10Buffer,0, HM10BufferSize);	
+	}
 }
 
 char HM10_ReadData() {
