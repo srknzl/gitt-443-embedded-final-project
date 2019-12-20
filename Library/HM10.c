@@ -19,7 +19,9 @@ void HM10_Init() {
 	HM10_UART->LCR |= (1 << 7);
 	
 	//Write correct DLM, DLL and FDR values for 9600 baudrate
-
+	HM10_UART->DLM = 0x01;
+	HM10_UART->DLL = 0x25;
+	HM10_UART->FDR = 0x01 << 0 | 0x03 << 4;
 
 	HM10_UART->LCR &= ~(1 << 7);
 	
@@ -29,8 +31,10 @@ void HM10_Init() {
 							| 0 << 4;
 	
 	//Enable the Receive Data Available Interrupt.
-	
+	HM10_UART->IER |= 1;
 	//Enable UART3_IRQn Interrupt.
+	NVIC_EnableIRQ(UART3_IRQn);
+	
 }
 
 void HM10_SendCommand(char* command) {
