@@ -3,6 +3,7 @@
 
 uint8_t HM10CurrentBufferIndex = 0;
 uint8_t HM10NewDataAvailable = 0;
+char statusString[120];
 
 char HM10Buffer[HM10BufferSize];
 
@@ -72,13 +73,42 @@ void HM10_Write(char* data) {
 // Handles received response that is inside the buffer.
 void HM10_SendResponseToUart(){
 		serialTransmitData = HM10Buffer; // Transmit the response to uart
-		Serial_SendData();
-		HM10_ClearBuffer(); 
+		Serial_SendData(); 
 }
 // Communication protocol.
-void HM10_ProcessResponse(){
-		
+
+/*
+
+
+*/
+void HM10_ProcessResponse(DeviceStatus status){
+		if(strcmp(HM10Buffer,"STATUS\r\n")==0){
+			HM10_SendCommand("STATUS");
+			HM10_SendCRLN();
+			HM10_SendCommand(getStatusString(status));
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"STATUS\r\n")==0){
+			
+		}else if(strcmp(HM10Buffer,"STATUS\r\n")==0){
+			
+		}else if(strcmp(HM10Buffer,"STATUS\r\n")==0){
+			
+		}
 }
+void HM10_SendCRLN(){
+	HM10_SendCommand("\r\n");
+}
+char* getStatusString(DeviceStatus status){
+	//{"distance":5,"light_level_left":150,"light_level_right":200,"op_mode":"AUTO"}
+	snprintf(statusString, 120, "{\"distance\":%u,\"light_level_left\":%u,\"light_level_right\":%u,\"op_mode\":\"%s\"}", 
+	status.distance,
+	status.lightLevelLeft,
+	status.lightLevelRight,
+	status.opmode);
+	return statusString;
+}
+
+
 uint8_t HM10_ResponseReceived(){
 	return HM10Buffer[HM10CurrentBufferIndex-1] == '\n';
 }

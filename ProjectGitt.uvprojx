@@ -407,6 +407,11 @@
               <FileType>1</FileType>
               <FilePath>.\Library\HM10.c</FilePath>
             </File>
+            <File>
+              <FileName>DataStructures.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\DataStructures.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

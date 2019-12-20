@@ -8,10 +8,19 @@
 
 char serialReceived[256]; 
 char receivedBlue[256];
+DeviceStatus status;
+uint32_t distance;
+uint16_t lightLevelLeft, lightLevelRight;
+char * opmode;
+
 
 void init() {	
 	Serial_Init();
 	HM10_Init();
+	status.distance = 10;
+	status.lightLevelLeft = 11;
+	status.lightLevelRight = 122;
+	status.opmode = "AUTO";
 }
 
 void update() {
@@ -29,6 +38,8 @@ void update() {
 		HM10NewDataAvailable = 0;
 		if(HM10_ResponseReceived()){  // if last received character is \n
 			HM10_SendResponseToUart();
+			HM10_ProcessResponse(status);
+			HM10_ClearBuffer();
 		}
 	}
 }
