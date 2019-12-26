@@ -44,14 +44,9 @@ void testUltrasonicWithLeds(){
 
 
 void init() {	
-	Serial_Init();
+	/*//Serial_Init();
 	HM10_Init();
-	status.distance = 0;
-	status.lightLevelLeft = 0;
-	status.lightLevelRight = 0;
-	status.opmode = "AUTO";
-	Serial_Init();
-	HM10_Init();
+	*/
 	/*
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
@@ -64,6 +59,11 @@ void init() {
 	LED3_Init();
 	LED4_Init();
 	//*/
+	
+	status.distance = 0;
+	status.lightLevelLeft = 0;
+	status.lightLevelRight = 0;
+	status.opmode = "AUTO";
 }
 
 void update() {
