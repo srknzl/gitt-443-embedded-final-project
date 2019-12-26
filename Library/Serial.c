@@ -1,4 +1,6 @@
 #include "Serial.h"
+#include "string.h"
+#include "HM10.h"
 
 char serialReceivedCharacter = 0;
 uint8_t serialNewDataAvailable = 0;
@@ -82,4 +84,20 @@ void Serial_SendData(){
 		while(!serialTransmitCompleted);
 	}
 }
+/*
+Indicates if response character sequence is ended. Last character is always \r in putty.
+which is sent when enter key is pressed.
+*/
+uint8_t Serial_ResponseReceived(){
+	return serialReceivedCharacter == '\r';
+}
 
+void Serial_SendCRLN(){
+	serialTransmitData = "\r\n";
+	Serial_SendData();
+}
+
+void Serial_SendString(char * data){
+	serialTransmitData = data;
+	Serial_SendData();
+}

@@ -1,7 +1,9 @@
 #include "HM10.h"
+#include "math.h"
 
 uint8_t HM10CurrentBufferIndex = 0;
 uint8_t HM10NewDataAvailable = 0;
+char statusString[120];
 
 char HM10Buffer[HM10BufferSize];
 
@@ -19,7 +21,9 @@ void HM10_Init() {
 	HM10_UART->LCR |= (1 << 7);
 	
 	//Write correct DLM, DLL and FDR values for 9600 baudrate
-
+	HM10_UART->DLM = 0x01;
+	HM10_UART->DLL = 0x25;
+	HM10_UART->FDR = 0x01 << 0 | 0x03 << 4;
 
 	HM10_UART->LCR &= ~(1 << 7);
 	
@@ -29,8 +33,10 @@ void HM10_Init() {
 							| 0 << 4;
 	
 	//Enable the Receive Data Available Interrupt.
-	
+	HM10_UART->IER |= 1;
 	//Enable UART3_IRQn Interrupt.
+	NVIC_EnableIRQ(UART3_IRQn);
+	
 }
 
 void HM10_SendCommand(char* command) {
@@ -38,8 +44,14 @@ void HM10_SendCommand(char* command) {
 }
 
 void HM10_ClearBuffer() {
+	uint32_t length;
 	HM10CurrentBufferIndex = 0;
-	strcpy(HM10Buffer,"");	
+	length = strlen(HM10Buffer);
+	if (length < HM10BufferSize){  // If length is less than buffer size memset may not write 0 to all the buffer.
+			memset(HM10Buffer,0, length);
+	}else{
+			memset(HM10Buffer,0, HM10BufferSize);	
+	}
 }
 
 char HM10_ReadData() {
@@ -58,6 +70,73 @@ void HM10_Write(char* data) {
 	}
 }
 
+// Handles received response that is inside the buffer.
+void HM10_SendResponseToUart(){
+		serialTransmitData = HM10Buffer; // Transmit the response to uart
+		Serial_SendData(); 
+}
+// Communication protocol.
+void HM10_ProcessResponse(DeviceStatus* status){
+		if(strcmp(HM10Buffer,"STATUS\r\n")==0){
+			HM10_SendCommand("STATUS");
+			HM10_SendCRLN();
+			HM10_SendCommand(getStatusString(status));
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"LEFT\r\n")==0){
+			HM10_SendCommand("LEFT");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"RIGHT\r\n")==0){
+			HM10_SendCommand("RIGHT");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"FORWARD\r\n")==0){
+			HM10_SendCommand("FORWARD");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"BACK\r\n")==0){
+			HM10_SendCommand("BACK");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"STOP\r\n")==0){
+			HM10_SendCommand("STOP");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"START\r\n")==0){
+			HM10_SendCommand("START");
+			HM10_SendCRLN();
+		}else if(strcmp(HM10Buffer,"AUTO\r\n")==0){
+			HM10_SendCommand("AUTO");
+			HM10_SendCRLN();
+			HM10_SendCommand("AUTONOMOUS");
+			HM10_SendCRLN();
+			status->opmode = "AUTO";
+		}else if(strcmp(HM10Buffer,"TEST\r\n")==0){
+			HM10_SendCommand("TEST");
+			HM10_SendCRLN();
+			HM10_SendCommand("TESTING");
+			HM10_SendCRLN();
+			status->opmode = "TEST";
+		}
+}
+void HM10_SendCRLN(){
+	HM10_SendCommand("\r\n");
+}
+
+/*
+Given status returns a json formatted string that represents the current status of the car
+
+*/
+char* getStatusString(DeviceStatus* status){
+	//{"distance":5,"light_level_left":150,"light_level_right":200,"op_mode":"AUTO"}
+	snprintf(statusString, 120, "{\"distance\":%u,\"light_level_left\":%u,\"light_level_right\":%u,\"op_mode\":\"%s\"}", 
+	status->distance,
+	status->lightLevelLeft,
+	status->lightLevelRight,
+	status->opmode);
+	return statusString;
+}
+
+
+uint8_t HM10_ResponseReceived(){
+	return HM10Buffer[HM10CurrentBufferIndex-1] == '\n';
+}
+
 void UART3_IRQHandler() {
 	char data;
 	data = HM10_ReadData();
@@ -65,4 +144,5 @@ void UART3_IRQHandler() {
 	HM10CurrentBufferIndex++;
 	HM10NewDataAvailable = 1;
 }
+
 
