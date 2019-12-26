@@ -8,6 +8,7 @@
 #include "Library/GPIO.h"
 #include "Library/Timer.h"
 #include "Library/Ultrasonic.h"
+#include "Library/ADC.h"
 
 char serialReceived[256]; 
 char receivedBlue[256];
@@ -44,9 +45,9 @@ void testUltrasonicWithLeds(){
 
 
 void init() {	
-	/*//Serial_Init();
+	Serial_Init();
 	HM10_Init();
-	*/
+	
 	/*
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
@@ -59,7 +60,8 @@ void init() {
 	LED3_Init();
 	LED4_Init();
 	//*/
-	
+	ADC_Init();
+	ADC_Start();
 	status.distance = 0;
 	status.lightLevelLeft = 0;
 	status.lightLevelRight = 0;
@@ -67,6 +69,8 @@ void init() {
 }
 
 void update() {
+	
+	
 	if(serialNewDataAvailable){
 		serialNewDataAvailable = 0;
 		if(Serial_ResponseReceived()){ // if last received character is \r
@@ -77,6 +81,7 @@ void update() {
 			strncat(serialReceived, &serialReceivedCharacter, 1); // If not append to form complete response
 		}
 	}
+	
 	if(HM10NewDataAvailable){
 		HM10NewDataAvailable = 0;
 		if(HM10_ResponseReceived()){  // if last received character is \n
@@ -85,10 +90,15 @@ void update() {
 			HM10_ClearBuffer();
 		}
 	}
+	/*
 	if(ultrasonicSensorNewDataAvailable){
 		ultrasonicSensorNewDataAvailable = 0;
 		status.distance = (ultrasonicSensorFallingCaptureTime - ultrasonicSensorRisingCaptureTime)/58;
 		testUltrasonicWithLeds();
+	}
+	*/
+	if(ADC_New_Data_Available){
+		status.lightLevelLeft = 1023 - (ADC_GetLastValue() / 4);
 	}
 }
 
