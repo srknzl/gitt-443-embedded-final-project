@@ -13,22 +13,58 @@ char serialReceived[256];
 char receivedBlue[256];
 DeviceStatus status;
 
+void testUltrasonicWithLeds(){
+	if(status.distance < 7){
+		LED1_On();
+		LED2_On();
+		LED3_On();
+		LED4_On();
+	}else if(status.distance < 12){
+		LED1_On();
+		LED2_On();
+		LED3_On();
+		LED4_Off();
+	}else if(status.distance < 20){
+		LED1_On();
+		LED2_On();
+		LED3_Off();
+		LED4_Off();
+	}else if(status.distance < 30){
+		LED1_On();
+		LED2_Off();
+		LED3_Off();
+		LED4_Off();
+	}else{
+		LED1_Off();
+		LED2_Off();
+		LED3_Off();
+		LED4_Off();
+	}
+}
+
 
 void init() {	
 	Serial_Init();
 	HM10_Init();
-	// status.distance = 10;
+	status.distance = 0;
 	status.lightLevelLeft = 11;
 	status.lightLevelRight = 122;
 	status.opmode = "AUTO";
-	//Serial_Init();
+	Serial_Init();
 	//serialTransmitData = "Selam bro";
 	//Serial_SendData();
-	//HM10_Init();
+	HM10_Init();
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
 	Ultrasonic_Capture_Timer_Init();
 	Ultrasonic_Start_Trigger_Timer();
+	
+	//* Needed for ultrasonic test
+	LED1_Init();
+	LED2_Init();
+	LED3_Init();
+	LED4_Init();
+	//*/
 }
 
 void update() {
@@ -50,7 +86,14 @@ void update() {
 			HM10_ClearBuffer();
 		}
 	}
+	if(ultrasonicSensorNewDataAvailable){
+		ultrasonicSensorNewDataAvailable = 0;
+		status.distance = (ultrasonicSensorFallingCaptureTime - ultrasonicSensorRisingCaptureTime)/58;
+		testUltrasonicWithLeds();
+	}
 }
+
+
 
 int main() {
 	init();

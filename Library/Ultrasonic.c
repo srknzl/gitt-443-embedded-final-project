@@ -3,8 +3,6 @@
 uint32_t ultrasonicSensorRisingCaptureTime;
 uint32_t ultrasonicSensorFallingCaptureTime;
 
-uint32_t ultrasonicSensorDuration = 0;
-uint32_t ultrasonicSensorDistance = 0;
 uint8_t ultrasonicSensorNewDataAvailable = 0;
 
 uint8_t ultrasonicSensorTriggerStart = 0;
