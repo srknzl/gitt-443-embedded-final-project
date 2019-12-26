@@ -47,19 +47,18 @@ void init() {
 	Serial_Init();
 	HM10_Init();
 	status.distance = 0;
-	status.lightLevelLeft = 11;
-	status.lightLevelRight = 122;
+	status.lightLevelLeft = 0;
+	status.lightLevelRight = 0;
 	status.opmode = "AUTO";
 	Serial_Init();
-	//serialTransmitData = "Selam bro";
-	//Serial_SendData();
 	HM10_Init();
+	/*
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
 	Ultrasonic_Capture_Timer_Init();
 	Ultrasonic_Start_Trigger_Timer();
-	
-	//* Needed for ultrasonic test
+	//*/
+	/* Needed for ultrasonic test
 	LED1_Init();
 	LED2_Init();
 	LED3_Init();
