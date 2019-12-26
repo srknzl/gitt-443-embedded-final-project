@@ -408,9 +408,49 @@
               <FilePath>.\Library\HM10.c</FilePath>
             </File>
             <File>
-              <FileName>DataStructures.h</FileName>
+              <FileName>Datastructures.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Library\DataStructures.h</FilePath>
+              <FilePath>.\Library\Datastructures.h</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\GPIO.c</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\GPIO.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\Timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ultrasonic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\Ultrasonic.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ultrasonic.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\Ultrasonic.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wait.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\Wait.c</FilePath>
+            </File>
+            <File>
+              <FileName>Wait.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\Wait.h</FilePath>
             </File>
           </Files>
         </Group>

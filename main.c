@@ -5,6 +5,9 @@
 
 #include "Library/Serial.h"
 #include "Library/HM10.h"
+#include "Library/GPIO.h"
+#include "Library/Timer.h"
+#include "Library/Ultrasonic.h"
 
 char serialReceived[256]; 
 char receivedBlue[256];
@@ -14,10 +17,18 @@ DeviceStatus status;
 void init() {	
 	Serial_Init();
 	HM10_Init();
-	status.distance = 10;
+	// status.distance = 10;
 	status.lightLevelLeft = 11;
 	status.lightLevelRight = 122;
 	status.opmode = "AUTO";
+	//Serial_Init();
+	//serialTransmitData = "Selam bro";
+	//Serial_SendData();
+	//HM10_Init();
+	Ultrasonic_Init();
+	Ultrasonic_Trigger_Timer_Init();
+	Ultrasonic_Capture_Timer_Init();
+	Ultrasonic_Start_Trigger_Timer();
 }
 
 void update() {
