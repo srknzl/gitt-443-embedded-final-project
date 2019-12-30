@@ -1,4 +1,10 @@
 #include "GPIO.h"
+#include "SystemStructures.h"
+
+static uint32_t LED1_Status = 0;
+static uint32_t LED2_Status = 1;
+static uint32_t LED3_Status = 2;
+static uint32_t LED4_Status = 3;
 
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value) {
 	if(value == 0) {
@@ -78,6 +84,22 @@ void LED4_On() {
 	GPIO_PIN_Write(LED4_PORT,LED4_MASK,HIGH);
 }
 
+void LED1_Blink() {
+	LED1_Status = 2;
+}
+
+void LED2_Blink() {
+	LED2_Status = 2;
+}
+
+void LED3_Blink() {
+	LED3_Status = 2;
+}
+
+void LED4_Blink() {
+	LED4_Status = 2;
+}
+
 void GPIO_init(){
 	IOCON_P1_23 &= ~7;
 	IOCON_P1_24 &= ~7;
@@ -85,6 +107,54 @@ void GPIO_init(){
 	GPIO_DIR_Write(PORT1,MC_IN2,1);
 	
 		
-	//initialize the motor
+	//initializes the motor
 	PORT1->PIN|=  (1 << 24) | (1 << 23);
+}
+
+// TODO: check variable names
+void update_LEDs() {
+	if(LED1_Status == 0) {				// off
+		LED1_Off();
+	} else if(LED1_Status == 1) {	// on
+		LED1_On();
+	} else if(LED1_Status == 2) {	// blinking, on
+		LED1_On();
+		LED1_Status = 3;
+	} else if(LED1_Status == 3) {	// blinking, off
+		LED1_Off();
+		LED1_Status = 2;
+	}
+	if(LED2_Status == 0) {				// off
+		LED2_Off();
+	} else if(LED2_Status == 1) {	// on
+		LED2_On();
+	} else if(LED2_Status == 2) {	// blinking, on
+		LED2_On();
+		LED2_Status = 3;
+	} else if(LED2_Status == 3) {	// blinking, off
+		LED2_Off();
+		LED2_Status = 2;
+	}
+	if(LED3_Status == 0) {				// off
+		LED3_Off();
+	} else if(LED3_Status == 1) {	// on
+		LED3_On();
+	} else if(LED3_Status == 2) {	// blinking, on
+		LED3_On();
+		LED3_Status = 3;
+	} else if(LED3_Status == 3) {	// blinking, off
+		LED3_Off();
+		LED3_Status = 2;
+	}
+	if(LED4_Status == 0) {				// off
+		LED4_Off();
+	} else if(LED4_Status == 1) {	// on
+		LED4_On();
+	} else if(LED4_Status == 2) {	// blinking, on
+		LED4_On();
+		LED4_Status = 3;
+	} else if(LED4_Status == 3) {	// blinking, off
+		LED4_Off();
+		LED4_Status = 2;
+	}
 }

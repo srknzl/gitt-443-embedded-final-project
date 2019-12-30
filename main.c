@@ -10,6 +10,7 @@
 #include "Library/Ultrasonic.h"
 #include "Library/ADC.h"
 #include "Library/PWM.h"
+#include "Library/SysTick.h"
 
 char serialReceived[256]; 
 char receivedBlue[256];
@@ -45,19 +46,19 @@ void testUltrasonicWithLeds(){
 }
 
 
-void init() {	
+void init() {
 	PWM_Init();
 	Serial_Init();
 	HM10_Init();
-	Timer1_Init();
+	//Timer1_Init();
 	
 	/*
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
 	Ultrasonic_Capture_Timer_Init();
 	Ultrasonic_Start_Trigger_Timer();
-	//*/
-	/* Needed for ultrasonic test
+	*/
+	///* Needed for ultrasonic test
 	LED1_Init();
 	LED2_Init();
 	LED3_Init();
@@ -74,12 +75,11 @@ void init() {
 	GPIO_init();
 	
 	PWM_ChangeDirection(2);
-	PWM_Write(50);
+	PWM_Write(100);
+	SysTick_Init();
 }
 
 void update() {
-	
-	
 	if(serialNewDataAvailable){
 		serialNewDataAvailable = 0;
 		if(Serial_ResponseReceived()){ // if last received character is \r

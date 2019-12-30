@@ -78,6 +78,13 @@ void LED2_On(void);
 void LED3_On(void);
 void LED4_On(void);
 
+void LED1_Blink(void);
+void LED2_Blink(void);
+void LED3_Blink(void);
+void LED4_Blink(void);
+
+void update_LEDs(void);
+
 void GPIO_init(void);
 
 #endif
