@@ -9,6 +9,7 @@
 #include "Library/Timer.h"
 #include "Library/Ultrasonic.h"
 #include "Library/ADC.h"
+#include "Library/PWM.h"
 
 char serialReceived[256]; 
 char receivedBlue[256];
@@ -45,8 +46,10 @@ void testUltrasonicWithLeds(){
 
 
 void init() {	
+	PWM_Init();
 	Serial_Init();
 	HM10_Init();
+	Timer1_Init();
 	
 	/*
 	Ultrasonic_Init();
@@ -66,6 +69,12 @@ void init() {
 	status.lightLevelLeft = 0;
 	status.lightLevelRight = 0;
 	status.opmode = "AUTO";
+		
+	//Initialize GPIO pins
+	GPIO_init();
+	
+	PWM_ChangeDirection(2);
+	PWM_Write(50);
 }
 
 void update() {

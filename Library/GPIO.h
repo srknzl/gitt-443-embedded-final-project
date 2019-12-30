@@ -53,8 +53,15 @@ typedef enum {
 #define LED4_PORT			PORT2
 #define LED4_MASK			((uint32_t) 1 << 19)
 
+#define IOCON_P1_23 *((volatile uint32_t*)(0x4002C0DC))
+#define IOCON_P1_24 *((volatile uint32_t*)(0x4002C0E0))
+#define MC_IN1 (1 << 23)
+#define MC_IN2 (1 << 24)
+
+
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);
 void GPIO_PIN_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);
+
 
 void LED1_Init(void);
 void LED2_Init(void);
@@ -70,5 +77,7 @@ void LED1_On(void);
 void LED2_On(void);
 void LED3_On(void);
 void LED4_On(void);
+
+void GPIO_init(void);
 
 #endif

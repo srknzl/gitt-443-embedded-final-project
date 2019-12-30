@@ -78,3 +78,13 @@ void LED4_On() {
 	GPIO_PIN_Write(LED4_PORT,LED4_MASK,HIGH);
 }
 
+void GPIO_init(){
+	IOCON_P1_23 &= ~7;
+	IOCON_P1_24 &= ~7;
+	GPIO_DIR_Write(PORT1,MC_IN1,1);
+	GPIO_DIR_Write(PORT1,MC_IN2,1);
+	
+		
+	//initialize the motor
+	PORT1->PIN|=  (1 << 24) | (1 << 23);
+}
