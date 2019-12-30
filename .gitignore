@@ -52,8 +52,3 @@ Mkfile.old
 dkms.conf
 Objects/*
 
-
-assets/443report/*.aux
-assets/443report/*.log
-assets/443report/*.pdf
-assets/443report/*.gz
