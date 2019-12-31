@@ -23,6 +23,12 @@ typedef enum {
 	HIGH = 1
 } GPIO_Value;
 
+typedef enum {
+	OFF = 0,
+	ON = 1,
+	BLINK_ON = 2,
+	BLINK_OFF = 3
+} LED_STATUS;
 
 #define GPIO_ADDRESS	0x20098000
 

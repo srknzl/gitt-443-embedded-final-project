@@ -74,7 +74,7 @@ void init() {
 	//Initialize GPIO pins
 	GPIO_init();
 	
-	PWM_ChangeDirection(2);
+	PWM_ChangeDirection(CLOCKWISE);
 	PWM_Write(100);
 	SysTick_Init();
 }

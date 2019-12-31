@@ -1,10 +1,10 @@
 #include "GPIO.h"
 #include "SystemStructures.h"
 
-static uint32_t LED1_Status = 0;
-static uint32_t LED2_Status = 1;
-static uint32_t LED3_Status = 2;
-static uint32_t LED4_Status = 3;
+static LED_STATUS LED1_Status = OFF;
+static LED_STATUS LED2_Status = ON;
+static LED_STATUS LED3_Status = BLINK_ON;
+static LED_STATUS LED4_Status = BLINK_OFF;
 
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value) {
 	if(value == 0) {
@@ -85,19 +85,19 @@ void LED4_On() {
 }
 
 void LED1_Blink() {
-	LED1_Status = 2;
+	LED1_Status = BLINK_ON;
 }
 
 void LED2_Blink() {
-	LED2_Status = 2;
+	LED2_Status = BLINK_ON;
 }
 
 void LED3_Blink() {
-	LED3_Status = 2;
+	LED3_Status = BLINK_ON;
 }
 
 void LED4_Blink() {
-	LED4_Status = 2;
+	LED4_Status = BLINK_ON;
 }
 
 void GPIO_init(){
@@ -113,48 +113,48 @@ void GPIO_init(){
 
 // TODO: check variable names
 void update_LEDs() {
-	if(LED1_Status == 0) {				// off
+	if(LED1_Status == OFF) {
 		LED1_Off();
-	} else if(LED1_Status == 1) {	// on
+	} else if(LED1_Status == ON) {	
 		LED1_On();
-	} else if(LED1_Status == 2) {	// blinking, on
+	} else if(LED1_Status == BLINK_ON) {	
 		LED1_On();
-		LED1_Status = 3;
-	} else if(LED1_Status == 3) {	// blinking, off
+		LED1_Status = BLINK_OFF;
+	} else if(LED1_Status == BLINK_OFF) {	
 		LED1_Off();
-		LED1_Status = 2;
+		LED1_Status = BLINK_ON;
 	}
-	if(LED2_Status == 0) {				// off
+	if(LED2_Status == OFF) {	
 		LED2_Off();
-	} else if(LED2_Status == 1) {	// on
+	} else if(LED2_Status == ON) {	
 		LED2_On();
-	} else if(LED2_Status == 2) {	// blinking, on
+	} else if(LED2_Status == BLINK_ON) {	
 		LED2_On();
-		LED2_Status = 3;
-	} else if(LED2_Status == 3) {	// blinking, off
+		LED2_Status = BLINK_OFF	;
+	} else if(LED2_Status == BLINK_OFF) {	
 		LED2_Off();
-		LED2_Status = 2;
+		LED2_Status = BLINK_ON;
 	}
-	if(LED3_Status == 0) {				// off
+	if(LED3_Status == OFF) {			
 		LED3_Off();
-	} else if(LED3_Status == 1) {	// on
+	} else if(LED3_Status == ON) {
 		LED3_On();
-	} else if(LED3_Status == 2) {	// blinking, on
+	} else if(LED3_Status == BLINK_ON) {	
 		LED3_On();
-		LED3_Status = 3;
-	} else if(LED3_Status == 3) {	// blinking, off
+		LED3_Status = BLINK_OFF;
+	} else if(LED3_Status == BLINK_OFF) {	
 		LED3_Off();
-		LED3_Status = 2;
+		LED3_Status = BLINK_ON;
 	}
-	if(LED4_Status == 0) {				// off
+	if(LED4_Status == OFF) {				
 		LED4_Off();
-	} else if(LED4_Status == 1) {	// on
+	} else if(LED4_Status == ON) {	
 		LED4_On();
-	} else if(LED4_Status == 2) {	// blinking, on
+	} else if(LED4_Status == BLINK_ON) {	
 		LED4_On();
-		LED4_Status = 3;
-	} else if(LED4_Status == 3) {	// blinking, off
+		LED4_Status = BLINK_OFF;
+	} else if(LED4_Status == BLINK_OFF) {	
 		LED4_Off();
-		LED4_Status = 2;
+		LED4_Status = BLINK_ON;
 	}
 }

@@ -32,6 +32,14 @@ typedef struct
   volatile	uint32_t CTCR;
 } PWM_TypeDef;
 
+typedef enum {
+	STOP = 0,
+	COUNTERCLOCKWISE = 1,
+	CLOCKWISE = 2
+}
+MotorDirection; 
+
+
 //0x00000000 is a dummy value, write the correct address
 #define IOCON_MOTOR_SPEED_ADDRESS	0x4002C094
 #define IOCON_MOTOR_SPEED	*((volatile uint32_t*)(IOCON_MOTOR_SPEED_ADDRESS))
@@ -48,6 +56,5 @@ typedef struct
 void PWM_Init(void);
 void PWM_Cycle_Rate(uint32_t period_In_Cycles);
 void PWM_Write(uint32_t T_ON);
-void PWM_ChangeDirection(uint32_t direction);
-
+void PWM_ChangeDirection(MotorDirection direction);
 #endif

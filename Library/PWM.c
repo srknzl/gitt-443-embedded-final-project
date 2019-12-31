@@ -1,6 +1,12 @@
 #include "PWM.h"
 #include "GPIO.h"
 
+/* For Motor controller:
+ IN1 = P5
+ IN2 = P6
+ EN1 = P28
+*/
+
 void PWM_Init() {
 	
 	uint32_t  temp;
@@ -56,16 +62,15 @@ void PWM_Write(uint32_t T_ON) {
 	PWMX->LER |= 1 << 3;
 }
 
-void PWM_ChangeDirection(uint32_t direction){
+void PWM_ChangeDirection(MotorDirection direction){
 	
-	//stop the motor
-	if(direction == 0){	
+	if(direction == STOP){	
 		GPIO_PIN_Write(PORT1,MC_IN1,1);
 		GPIO_PIN_Write(PORT1,MC_IN2,1);
-	} else if(direction == 1){	// if 1, turn counter-clockwise
+	} else if(direction == COUNTERCLOCKWISE){	
 		GPIO_PIN_Write(PORT1,MC_IN1,0);
 		GPIO_PIN_Write(PORT1,MC_IN2,1);
-	}	else if(direction == 2){	// if 2, turn clockwise
+	}	else if(direction == CLOCKWISE){
 		GPIO_PIN_Write(PORT1,MC_IN1,1);
 		GPIO_PIN_Write(PORT1,MC_IN2,0);
 	}
