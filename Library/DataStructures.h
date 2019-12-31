@@ -8,6 +8,7 @@ typedef struct {
 	uint16_t lightLevelLeft;
 	uint16_t lightLevelRight;
 	char* opmode; // AUTO or TEST
+	uint32_t speed; // 0-100
 } DeviceStatus;
 
 	

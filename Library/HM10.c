@@ -1,5 +1,6 @@
 #include "HM10.h"
 #include "math.h"
+#include "PWM.h"
 
 uint8_t HM10CurrentBufferIndex = 0;
 uint8_t HM10NewDataAvailable = 0;
@@ -91,12 +92,15 @@ void HM10_ProcessResponse(DeviceStatus* status){
 		}else if(strcmp(HM10Buffer,"FORWARD\r\n")==0){
 			HM10_SendCommand("FORWARD");
 			HM10_SendCRLN();
+			PWM_ChangeDirection(CLOCKWISE);
 		}else if(strcmp(HM10Buffer,"BACK\r\n")==0){
 			HM10_SendCommand("BACK");
 			HM10_SendCRLN();
+			PWM_ChangeDirection(COUNTERCLOCKWISE);
 		}else if(strcmp(HM10Buffer,"STOP\r\n")==0){
 			HM10_SendCommand("STOP");
 			HM10_SendCRLN();
+			PWM_ChangeDirection(STOP);
 		}else if(strcmp(HM10Buffer,"START\r\n")==0){
 			HM10_SendCommand("START");
 			HM10_SendCRLN();

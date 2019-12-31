@@ -65,7 +65,7 @@ void init() {
 	LED4_Init();
 	//*/
 	ADC_Init();
-	ADC_Start();
+	//ADC_Start();
 	status.distance = 0;
 	status.lightLevelLeft = 0;
 	status.lightLevelRight = 0;
@@ -106,8 +106,15 @@ void update() {
 		testUltrasonicWithLeds();
 	}
 	*/
-	if(ADC_New_Data_Available){
-		status.lightLevelLeft = 1023 - (ADC_GetLastValue() / 4);
+	if(ADC_New_Speed_Available){
+		status.speed = (ADC_Get_Last_Speed()*100) / 4095;
+		PWM_Write(100-status.speed);
+	}
+	if(ADC_New_Left_Light_Available){
+		status.lightLevelLeft = 1023 - (ADC_Get_Last_Left_Light() / 4);
+	}
+	if(ADC_New_Right_Light_Available){
+		status.lightLevelRight = 1023 - (ADC_Get_Last_Right_Light() / 4);
 	}
 }
 

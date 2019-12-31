@@ -393,6 +393,11 @@
           <GroupName>Library</GroupName>
           <Files>
             <File>
+              <FileName>HM10.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\HM10.c</FilePath>
+            </File>
+            <File>
               <FileName>SystemStructures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Library\SystemStructures.h</FilePath>

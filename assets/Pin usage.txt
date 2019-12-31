@@ -1,0 +1,7 @@
+P11 Ultrasonic Trigger P0_9
+P16 Ultrasonic Echo P0_24
+P10 Tx Hm10 -- P0_1
+P9 Rx Hm10 -- P0_0
+P17 LDR Left Analog in -- P0_25
+P19 Potentiometer Analog in -- P1_30
+P20 LDR Right Analog in -- P1_31

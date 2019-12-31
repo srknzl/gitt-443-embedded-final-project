@@ -14,20 +14,13 @@ void PWM_Init() {
 	
 	//Change the function of the pin in here:
 	PCONP |= (1 << 5 | 1 << 6);
-	
-	
-	
 	temp =  IOCON_MOTOR_SPEED;
-	
-	
 	temp |= 3;
 	temp &= ~4;
-	
 	IOCON_MOTOR_SPEED= temp;
 	//Enable PWM output for corresponding pin.
 	PWMX->PCR |= (1 << 11);
 	PWMX->TCR = 1 << 1;
-	
 	PWMX->PR = 9;
 	
 	//Configure MR0 register for a period of 20 ms
