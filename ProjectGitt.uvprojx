@@ -408,11 +408,6 @@
               <FilePath>.\Library\Serial.c</FilePath>
             </File>
             <File>
-              <FileName>HM10.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Library\HM10.c</FilePath>
-            </File>
-            <File>
               <FileName>Datastructures.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Library\Datastructures.h</FilePath>

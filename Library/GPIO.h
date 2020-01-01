@@ -1,7 +1,9 @@
 #ifndef GPIO_H
 #define GPIO_H
 
+
 #include "LPC407x_8x_177x_8x.h"
+#include "DataStructures.h"
 
 typedef struct
 {
@@ -32,6 +34,14 @@ typedef enum {
 
 #define GPIO_ADDRESS	0x20098000
 
+#define GPIO_RISING_INTERRUPT_STATUS_PORT0 *((volatile uint32_t*)(0x40028084))
+#define GPIO_FALLING_INTERRUPT_STATUS_PORT0 *((volatile uint32_t*)(0x40028088))
+#define GPIO_ENR_PORT0 *((volatile uint32_t*)(0x40028090)) 
+#define GPIO_ENF_PORT0 *((volatile uint32_t*)(0x40028094)) 
+#define GPIO_CLEAR_INTERRUPT_PORT0 *((volatile uint32_t*)(0x4002808C)) 
+
+#define SPEEDSENSOR_MASK 1<<21
+
 #define PORT0	((GPIO_TypeDef*) PORT0_BASE)
 #define PORT1	((GPIO_TypeDef*) PORT1_BASE)
 #define PORT2	((GPIO_TypeDef*) PORT2_BASE)
@@ -59,11 +69,13 @@ typedef enum {
 #define LED4_PORT			PORT2
 #define LED4_MASK			((uint32_t) 1 << 19)
 
+#define IOCON_P0_21 *((volatile uint32_t*)(0x4002C054))
 #define IOCON_P1_23 *((volatile uint32_t*)(0x4002C0DC))
 #define IOCON_P1_24 *((volatile uint32_t*)(0x4002C0E0))
+	
 #define MC_IN1 (1 << 23)
 #define MC_IN2 (1 << 24)
-
+#define MC_SPEED (1 << 21)
 
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);
 void GPIO_PIN_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);
@@ -91,6 +103,6 @@ void LED4_Blink(void);
 
 void update_LEDs(void);
 
-void GPIO_init(void);
+void GPIO_init(DeviceStatus* status);
 
 #endif

@@ -51,14 +51,12 @@ void init() {
 	PWM_Init();
 	Serial_Init();
 	HM10_Init();
-	//Timer1_Init();
 	
-	/*
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
 	Ultrasonic_Capture_Timer_Init();
 	Ultrasonic_Start_Trigger_Timer();
-	*/
+	
 	///* Needed for ultrasonic test
 	LED1_Init();
 	LED2_Init();
@@ -66,7 +64,7 @@ void init() {
 	LED4_Init();
 	//*/
 	ADC_Init();
-	//ADC_Start();
+	
 	status.distance = 0;
 	status.lightLevelLeft = 0;
 	status.lightLevelRight = 0;
@@ -80,12 +78,11 @@ void init() {
 	HM10_SendCRLN();
 	
 	//Initialize GPIO pins
-	GPIO_init();
+	GPIO_init(&status);
 	SysTick_Init();
 }
 
 void update() {
-		
 		if(serialNewDataAvailable){
 			serialNewDataAvailable = 0;
 			if(Serial_ResponseReceived()){ // if last received character is \r
@@ -151,6 +148,14 @@ void update() {
 				}
 				status.willContinue = 0;
 			}
+			
+			if((status.currentOperation == LEFT || status.currentOperation == RIGHT) && status.turnCount > 6){
+				status.turnCount = 0;
+				status.currentOperation = STOP;
+				Stop_Motors();
+			}
+
+			
 		}else if(strcmp(status.opmode, "AUTO")==0){
 			if(status.started){
 				// Todo autonomous code 
@@ -159,7 +164,7 @@ void update() {
 				Stop_Motors();
 				status.willContinue = 0;
 			}
-		}	
+		}
 }
 
 

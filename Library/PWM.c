@@ -1,5 +1,6 @@
 #include "PWM.h"
 #include "GPIO.h"
+#include "DataStructures.h"
 
 /* For Motor controller:
  IN1 = P5
@@ -10,7 +11,6 @@
 void PWM_Init() {
 	
 	uint32_t  temp;
-	int i;
 	
 	//Change the function of the pin in here:
 	PCONP |= (1 << 5 | 1 << 6);
@@ -31,7 +31,7 @@ void PWM_Init() {
 	
 	PWMX->TCR = (1 << 0 | 1 << 3);
 	
-	for(i=0;i<6000000;i++);
+	//for(i=0;i<6000000;i++);
 	//PWM_Write(0);
 }
 
@@ -77,10 +77,12 @@ void Move_Backward(){
 	PWM_ChangeDirection(COUNTERCLOCKWISE);
 }
 void Turn_Left(){
+	PWM_ChangeDirection(CLOCKWISE);
 	// Todo add led functionality
 	// Todo add turn left code
 }
 void Turn_Right(){
+	PWM_ChangeDirection(COUNTERCLOCKWISE);
 	// Todo add led functionality
 	// Todo add turn left code
 }

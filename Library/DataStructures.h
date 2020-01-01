@@ -21,6 +21,7 @@ typedef struct {
 	uint8_t underLight; // 1 if light level on either side is more than 300 lumens
 	uint8_t willContinue; // Indicates stopped due to light
 	uint8_t started; // Start flag in autonomous mode
+	uint32_t turnCount; // Turn count for turning
 } DeviceStatus;
 
 	

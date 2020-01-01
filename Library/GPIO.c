@@ -6,6 +6,9 @@ static LED_STATUS LED2_Status = ON;
 static LED_STATUS LED3_Status = BLINK_ON;
 static LED_STATUS LED4_Status = BLINK_OFF;
 
+DeviceStatus* statusref;
+static uint32_t turnTempCounter = 0;
+
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value) {
 	if(value == 0) {
 		PORT->DIR &= ~MASK;
@@ -100,12 +103,20 @@ void LED4_Blink() {
 	LED4_Status = BLINK_ON;
 }
 
-void GPIO_init(){
+void GPIO_init(DeviceStatus* s){
+	statusref = s;
 	IOCON_P1_23 &= ~7;
 	IOCON_P1_24 &= ~7;
+	IOCON_P0_21 &= ~7;
+	
 	GPIO_DIR_Write(PORT1,MC_IN1,1);
 	GPIO_DIR_Write(PORT1,MC_IN2,1);
+	GPIO_DIR_Write(PORT1,MC_SPEED,0);
 	
+	GPIO_ENR_PORT0 |= 1 << 21;
+	GPIO_ENF_PORT0 |= 1 << 21;
+	NVIC_EnableIRQ(GPIO_IRQn);
+	//GPIO_ADDRESS
 		
 	//initializes the motor
 	PORT1->PIN|=  (1 << 24) | (1 << 23);
@@ -156,5 +167,22 @@ void update_LEDs() {
 	} else if(LED4_Status == BLINK_OFF) {	
 		LED4_Off();
 		LED4_Status = BLINK_ON;
+	}
+}
+
+void GPIO_IRQHandler(){
+	uint32_t fallingStatus, risingStatus;
+	fallingStatus = GPIO_FALLING_INTERRUPT_STATUS_PORT0;
+	risingStatus = GPIO_RISING_INTERRUPT_STATUS_PORT0;
+	if((fallingStatus & SPEEDSENSOR_MASK) > 0){
+		GPIO_CLEAR_INTERRUPT_PORT0 |= SPEEDSENSOR_MASK;
+		turnTempCounter++;
+		if(turnTempCounter == 6){
+			statusref->turnCount++;
+			turnTempCounter = 0;
+		}
+	}else if((risingStatus & SPEEDSENSOR_MASK) > 0){
+		GPIO_CLEAR_INTERRUPT_PORT0 |= SPEEDSENSOR_MASK;
+		
 	}
 }
