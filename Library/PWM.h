@@ -33,7 +33,7 @@ typedef struct
 } PWM_TypeDef;
 
 typedef enum {
-	STOP = 0,
+	STOPMOVING = 0,
 	COUNTERCLOCKWISE = 1,
 	CLOCKWISE = 2
 }
@@ -57,4 +57,10 @@ void PWM_Init(void);
 void PWM_Cycle_Rate(uint32_t period_In_Cycles);
 void PWM_Write(uint32_t T_ON);
 void PWM_ChangeDirection(MotorDirection direction);
+void Move_Forward(void);
+void Move_Backward(void);
+void Turn_Left(void);
+void Turn_Right(void);
+void Stop_Motors(void);
+void Change_Speed(uint32_t speed);
 #endif

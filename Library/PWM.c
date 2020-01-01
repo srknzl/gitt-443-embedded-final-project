@@ -56,8 +56,7 @@ void PWM_Write(uint32_t T_ON) {
 }
 
 void PWM_ChangeDirection(MotorDirection direction){
-	
-	if(direction == STOP){	
+	if(direction == STOPMOVING){	
 		GPIO_PIN_Write(PORT1,MC_IN1,1);
 		GPIO_PIN_Write(PORT1,MC_IN2,1);
 	} else if(direction == COUNTERCLOCKWISE){	
@@ -67,6 +66,28 @@ void PWM_ChangeDirection(MotorDirection direction){
 		GPIO_PIN_Write(PORT1,MC_IN1,1);
 		GPIO_PIN_Write(PORT1,MC_IN2,0);
 	}
-		
-	
+}
+
+void Move_Forward(){
+	// Todo add led functionality
+	PWM_ChangeDirection(CLOCKWISE);
+}
+void Move_Backward(){
+	// Todo add led functionality
+	PWM_ChangeDirection(COUNTERCLOCKWISE);
+}
+void Turn_Left(){
+	// Todo add led functionality
+	// Todo add turn left code
+}
+void Turn_Right(){
+	// Todo add led functionality
+	// Todo add turn left code
+}
+void Stop_Motors(){
+	// Todo add led functionality
+	PWM_ChangeDirection(STOPMOVING);
+}
+void Change_Speed(uint32_t speed){
+	PWM_Write(100-speed);
 }
