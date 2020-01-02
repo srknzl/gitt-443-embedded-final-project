@@ -25,14 +25,12 @@ void PWM_Init() {
 	PWMX->PR = 9;
 	
 	PWMX->MR0 = 120000;
-	PWMX->MCR = 1 << 1;;
+	PWMX->MCR = 1 << 1;
 	
 	PWMX->LER |= 1 << 0;
 	
 	PWMX->TCR = (1 << 0 | 1 << 3); // Start PWM counters
 	
-	//for(i=0;i<6000000;i++);
-	//PWM_Write(0);
 }
 
 void PWM_Cycle_Rate(uint32_t period_In_Cycles) {
@@ -63,7 +61,7 @@ void PWM_Write_Motor2(uint32_t T_ON) {
 	PWMX->MR4 = temp;
 	
 	//Enable PWM Match Register Latch.
-	PWMX->LER |= 1 << 3;
+	PWMX->LER |= 1 << 4;
 }
 
 

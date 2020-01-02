@@ -30,5 +30,5 @@ void SysTick_Handler() {
 		on = 1;
 	}
 	//*/
-	update_LEDs();
+	//update_LEDs();
 }

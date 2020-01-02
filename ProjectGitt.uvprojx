@@ -492,6 +492,11 @@
               <FileType>5</FileType>
               <FilePath>.\Library\Motors.h</FilePath>
             </File>
+            <File>
+              <FileName>CarLEDs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\CarLEDs.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
