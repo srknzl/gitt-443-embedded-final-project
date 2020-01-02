@@ -3,8 +3,6 @@
 #include "DataStructures.h"
 
 
-static uint32_t wheelToothCount = 0;
-
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value) {
 	if(value == 0) {
 		PORT->DIR &= ~MASK;
@@ -105,12 +103,11 @@ void GPIO_init(){
 	GPIO_DIR_Write(PORT5,MASK_IN3,1); // Make motor 2 control pins output
 	GPIO_DIR_Write(PORT5,MASK_IN4,1);
 	
-	
+	GPIO_ENF_PORT0 |= 1 << 21;
+	NVIC_EnableIRQ(GPIO_IRQn);
 	
 	GPIO_DIR_Write(PORT1,MASK_SPEED,0); // Make speed sensor pin input
-	
-	GPIO_INTERRUPT->ENF0 |= 1 << 21; // Enable falling interrupt for speed sensor.
-	
+		
 	NVIC_EnableIRQ(GPIO_IRQn);
 		
 	
@@ -166,12 +163,11 @@ void update_LEDs() {
 }
 
 void GPIO_IRQHandler(){
-	if((GPIO_INTERRUPT->STATF0 & MASK_SPEED) > 0){ // If speed sensor's falling interrupt 
-		GPIO_INTERRUPT->CLR0 |= MASK_SPEED; // Clear the interrput first
-		wheelToothCount++; // Increase wheel tooth count
-		if(wheelToothCount == 6){ // The wheel has 6 tooth
-			status.turnCount++; // If tooth count is 6 increase turn count by 1
-			wheelToothCount = 0; // Reset wheel tooth count 
+	if((GPIO_FALLING_INTERRUPT_STATUS_PORT0 & SPEEDSENSOR_MASK) > 0){
+		GPIO_CLEAR_INTERRUPT_PORT0 |= SPEEDSENSOR_MASK;
+		if(status.currentOperation == LEFT || status.currentOperation == RIGHT){
+			status.wheelToothCount++;
 		}
+		
 	}
 }

@@ -126,5 +126,10 @@ void update_LEDs(void);
 
 void GPIO_init(void);
 
+#define GPIO_FALLING_INTERRUPT_STATUS_PORT0 *((volatile uint32_t*)(0x40028088))
+#define GPIO_ENF_PORT0 *((volatile uint32_t*)(0x40028094)) 
+#define GPIO_CLEAR_INTERRUPT_PORT0 *((volatile uint32_t*)(0x4002808C)) 
+
+#define SPEEDSENSOR_MASK 1<<21
 
 #endif

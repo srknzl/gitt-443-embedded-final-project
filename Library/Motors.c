@@ -51,13 +51,13 @@ void Move_Backward(){
 	Motor2_ChangeDirection(COUNTERCLOCKWISE);
 }
 void Turn_Left(){
-	Motor1_ChangeDirection(CLOCKWISE);
-	Motor2_ChangeDirection(COUNTERCLOCKWISE);
+	Motor1_ChangeDirection(COUNTERCLOCKWISE);
+	Motor2_ChangeDirection(CLOCKWISE);
 	// Todo add led functionality
 }
 void Turn_Right(){
-	Motor1_ChangeDirection(COUNTERCLOCKWISE);
-	Motor2_ChangeDirection(CLOCKWISE);
+	Motor1_ChangeDirection(CLOCKWISE);
+	Motor2_ChangeDirection(COUNTERCLOCKWISE);
 	// Todo add led functionality
 }
 void Stop_Motors(){

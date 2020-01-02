@@ -75,7 +75,7 @@ void init() {
 	status.underLight = 0;
 	status.currentOperation = STOP;
 	status.willContinue = 0;
-	status.turnCount = 0;
+	status.wheelToothCount = 0;
 	CarLEDs_stop();
 	
 	
@@ -131,7 +131,7 @@ void update() {
 			status.lightLevelRight = 1023 - (ADC_Get_Last_Right_Light() / 4);
 		}
 		
-		if(status.lightLevelLeft > 500 || status.lightLevelRight > 500){
+		if(status.lightLevelLeft > LIGHT_THRESHOLD || status.lightLevelRight > LIGHT_THRESHOLD){
 				status.underLight = 1;
 		}else{
 				status.underLight = 0;
@@ -149,25 +149,39 @@ void update() {
 			if(status.currentOperation == STOP && status.willContinue && status.underLight == 0){ // continue last operation
 				status.currentOperation = lastOperation;
 				if(status.currentOperation == FORWARD){
+						CarLEDs_goingForward();
 						Move_Forward();
 				}else if(status.currentOperation == BACKWARD){
+						CarLEDs_goingBackward();
 						Move_Backward();
 				}else if(status.currentOperation == STOP){
+						CarLEDs_stop();
 						Stop_Motors();
 				}
 				status.willContinue = 0;
 			}
 			
-			if((status.currentOperation == LEFT || status.currentOperation == RIGHT) && status.turnCount > 6){
-				status.turnCount = 0;
+			if((status.currentOperation == LEFT || status.currentOperation == RIGHT) && status.wheelToothCount > TURN_COUNT_FOR_90){
+				status.wheelToothCount = 0;
 				status.currentOperation = STOP;
 				Stop_Motors();
+				CarLEDs_stop();
 			}
 
 			
 		}else if(strcmp(status.opmode, "AUTO")==0){
 			if(status.started){
 				// Todo autonomous code 
+				if(status.distance < 10){
+					
+					
+				}else if(status.distance < 25){
+					
+					
+				}else {
+					
+					
+				}
 			}else{
 				status.currentOperation = STOP;
 				Stop_Motors();
