@@ -1,5 +1,6 @@
 #include "GPIO.h"
 #include "SystemStructures.h"
+#include "DataStructures.h"
 
 static LED_STATUS LED1_Status = OFF;
 static LED_STATUS LED2_Status = ON;

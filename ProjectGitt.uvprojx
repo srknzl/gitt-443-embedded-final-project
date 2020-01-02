@@ -482,6 +482,16 @@
               <FileType>1</FileType>
               <FilePath>.\Library\SysTick.c</FilePath>
             </File>
+            <File>
+              <FileName>Motors.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\Motors.c</FilePath>
+            </File>
+            <File>
+              <FileName>Motors.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\Motors.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

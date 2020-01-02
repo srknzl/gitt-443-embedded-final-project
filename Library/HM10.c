@@ -1,6 +1,14 @@
 #include "HM10.h"
 #include "math.h"
-#include "PWM.h"
+#include "Motors.h"
+#include "Serial.h"
+#include "DataStructures.h"
+#include "SystemStructures.h"
+
+#include <stdio.h>
+#include <string.h>
+
+
 
 uint8_t HM10CurrentBufferIndex = 0;
 uint8_t HM10NewDataAvailable = 0;

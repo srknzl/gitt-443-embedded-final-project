@@ -1,6 +1,8 @@
 #include "Serial.h"
 #include "string.h"
 #include "HM10.h"
+#include "SystemStructures.h"
+
 
 char serialReceivedCharacter = 0;
 uint8_t serialNewDataAvailable = 0;

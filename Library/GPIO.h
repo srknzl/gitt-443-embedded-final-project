@@ -3,7 +3,6 @@
 
 
 #include "LPC407x_8x_177x_8x.h"
-#include "DataStructures.h"
 
 typedef struct
 {
@@ -83,8 +82,11 @@ typedef enum {
 #define IOCON_P1_23 *((volatile uint32_t*)(0x4002C0DC))
 #define IOCON_P1_24 *((volatile uint32_t*)(0x4002C0E0))
 	
-#define MASK_IN1 ((uint32_t) 1 << 23)
+#define MASK_IN1 ((uint32_t) 1 << 23) // For motor1
 #define MASK_IN2 ((uint32_t) 1 << 24)
+
+#define MASK_IN3 ((uint32_t) 1 << 23) // For motor 2 
+#define MASK_IN4 ((uint32_t) 1 << 24)
 #define MASK_SPEED ((uint32_t) 1 << 21)
 
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);

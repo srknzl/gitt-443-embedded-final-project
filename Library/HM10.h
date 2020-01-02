@@ -3,12 +3,6 @@
 
 #include "LPC407x_8x_177x_8x.h"
 
-#include "Serial.h"
-#include "DataStructures.h"
-
-#include <stdio.h>
-#include <string.h>
-
 #define HM10BufferSize 256
 
 #define HM10_UART_BASE	0x4009C000

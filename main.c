@@ -11,6 +11,8 @@
 #include "Library/ADC.h"
 #include "Library/PWM.h"
 #include "Library/SysTick.h"
+#include "Library/Motors.h"
+#include "Library/DataStructures.h"
 
 char serialReceived[256]; 
 char receivedBlue[256];
@@ -51,13 +53,13 @@ void init() {
 	PWM_Init();
 	Serial_Init();
 	HM10_Init();
-	
+	///*
 	Ultrasonic_Init();
 	Ultrasonic_Trigger_Timer_Init();
 	Ultrasonic_Capture_Timer_Init();
 	Ultrasonic_Start_Trigger_Timer();
-	
-	///* Needed for ultrasonic test
+	//*/
+	///* 
 	LED1_Init();
 	LED2_Init();
 	LED3_Init();
@@ -72,6 +74,8 @@ void init() {
 	status.underLight = 0;
 	status.currentOperation = STOP;
 	status.willContinue = 0;
+	status.turnCount = 0;
+	
 	Change_Speed(0);
 	
 	HM10_SendCommand("TESTING");

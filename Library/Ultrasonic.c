@@ -1,4 +1,7 @@
 #include "Ultrasonic.h"
+#include "GPIO.h"
+#include "Timer.h"
+#include "SystemStructures.h"
 
 uint32_t ultrasonicSensorRisingCaptureTime;
 uint32_t ultrasonicSensorFallingCaptureTime;
