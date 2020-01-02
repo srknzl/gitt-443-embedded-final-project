@@ -21,14 +21,5 @@ void SysTick_Init() {
 }
 
 void SysTick_Handler() {
-	/*
-	if(on) {
-		LED1_On();
-		on = 0;
-	} else {
-		LED1_Off();
-		on = 1;
-	}
-	//*/
-	//update_LEDs();
+	update_LEDs();
 }

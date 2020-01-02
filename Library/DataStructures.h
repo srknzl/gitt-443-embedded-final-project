@@ -2,6 +2,7 @@
 #define DATASTRUCTURES_H
 
 #include "LPC407x_8x_177x_8x.h"
+#include "GPIO.h"
 
 typedef enum {
 	FORWARD = 0,
@@ -22,6 +23,10 @@ typedef struct {
 	uint8_t willContinue; // Indicates stopped due to light
 	uint8_t started; // Start flag in autonomous mode
 	uint32_t turnCount; // Turn count for turning
+	LED_STATUS LED1_Status;
+	LED_STATUS LED2_Status;
+	LED_STATUS LED3_Status;
+	LED_STATUS LED4_Status;
 } DeviceStatus;
 
 extern DeviceStatus status;

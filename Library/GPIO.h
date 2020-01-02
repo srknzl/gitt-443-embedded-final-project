@@ -66,17 +66,17 @@ typedef enum {
 #define PORT5_BASE		(GPIO_ADDRESS + 0x0A0)
 
 //Write Correct Port and Mask values.
-#define LED1_PORT			PORT1
-#define LED1_MASK			((uint32_t) 1 << 18)
+#define LED1_PORT			PORT0 // Back right 
+#define LED1_MASK			((uint32_t) 1 << 23)
 
-#define LED2_PORT			PORT0
-#define LED2_MASK			((uint32_t) 1 << 13)
+#define LED2_PORT			PORT1 // Front right
+#define LED2_MASK			((uint32_t) 1 << 7)
 
 #define LED3_PORT			PORT1
-#define LED3_MASK			((uint32_t) 1 << 13)
+#define LED3_MASK			((uint32_t) 1 << 11)
 
-#define LED4_PORT			PORT2
-#define LED4_MASK			((uint32_t) 1 << 19)
+#define LED4_PORT			PORT1
+#define LED4_MASK			((uint32_t) 1 << 12)
 
 #define IOCON_P0_21 *((volatile uint32_t*)(0x4002C054))
 
@@ -125,5 +125,6 @@ void LED4_Blink(void);
 void update_LEDs(void);
 
 void GPIO_init(void);
+
 
 #endif

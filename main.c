@@ -13,6 +13,7 @@
 #include "Library/SysTick.h"
 #include "Library/Motors.h"
 #include "Library/DataStructures.h"
+#include "Library/CarLEDs.h"
 
 char serialReceived[256]; 
 char receivedBlue[256];
@@ -75,6 +76,8 @@ void init() {
 	status.currentOperation = STOP;
 	status.willContinue = 0;
 	status.turnCount = 0;
+	CarLEDs_stop();
+	
 	
 	Change_Motor1_Speed(100);
 	Change_Motor2_Speed(100);
@@ -116,8 +119,8 @@ void update() {
 		
 		if(ADC_New_Speed_Available){
 			status.speed = (ADC_Get_Last_Speed()*100) / 4095;
-			Change_Motor1_Speed(100); // status.speed
-			Change_Motor2_Speed(100);
+			Change_Motor1_Speed(status.speed); // status.speed
+			Change_Motor2_Speed(status.speed);
 		}
 		
 		if(ADC_New_Left_Light_Available){

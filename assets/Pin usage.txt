@@ -18,3 +18,8 @@ For Motor 2 controller:
 IN3 = P39 -- P5_0
 IN4 = P38 -- P5_1
 EN2 = P27 -- P1_6 PWM0_4
+
+P26 P1.7 
+P25 P1.11 
+P24 P1.12 
+P23 P2.10 

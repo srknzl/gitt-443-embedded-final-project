@@ -4,6 +4,7 @@
 #include "Serial.h"
 #include "DataStructures.h"
 #include "SystemStructures.h"
+#include "CarLEDs.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -97,6 +98,7 @@ void HM10_ProcessResponse(){
 			if(strcmp(status.opmode, "TEST")==0){
 				status.currentOperation = LEFT;
 				Turn_Left();
+				CarLEDs_turningLeft();
 			}
 		}else if(strcmp(HM10Buffer,"RIGHT\r\n")==0){
 			HM10_SendCommand("RIGHT");
@@ -104,6 +106,7 @@ void HM10_ProcessResponse(){
 			if(strcmp(status.opmode, "TEST")==0){
 				status.currentOperation = RIGHT;
 				Turn_Right();
+				CarLEDs_turningRight();
 			}
 		}else if(strcmp(HM10Buffer,"FORWARD\r\n")==0){
 			HM10_SendCommand("FORWARD");
@@ -111,6 +114,7 @@ void HM10_ProcessResponse(){
 			if(strcmp(status.opmode, "TEST")==0){
 				status.currentOperation = FORWARD;
 				Move_Forward();
+				CarLEDs_goingForward();
 			}
 		}else if(strcmp(HM10Buffer,"BACK\r\n")==0){
 			HM10_SendCommand("BACK");
@@ -118,6 +122,7 @@ void HM10_ProcessResponse(){
 			if(strcmp(status.opmode, "TEST")==0){
 				status.currentOperation = BACKWARD;
 				Move_Backward();
+				CarLEDs_goingBackward();
 			}
 		}else if(strcmp(HM10Buffer,"STOP\r\n")==0){
 			HM10_SendCommand("STOP");
@@ -126,6 +131,7 @@ void HM10_ProcessResponse(){
 				status.currentOperation = STOP;
 				Stop_Motors();
 				status.willContinue = 0;
+				CarLEDs_stop();
 			}
 		}else if(strcmp(HM10Buffer,"START\r\n")==0){
 			HM10_SendCommand("START");

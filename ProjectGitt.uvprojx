@@ -493,9 +493,14 @@
               <FilePath>.\Library\Motors.h</FilePath>
             </File>
             <File>
+              <FileName>CarLEDs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\CarLEDs.c</FilePath>
+            </File>
+            <File>
               <FileName>CarLEDs.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\CarLEDs.h</FilePath>
+              <FilePath>.\Library\CarLEDs.h</FilePath>
             </File>
           </Files>
         </Group>
