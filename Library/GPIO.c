@@ -101,6 +101,10 @@ void GPIO_init(){
 	
 	GPIO_DIR_Write(PORT1,MASK_IN1,1); // Make motor control pins output
 	GPIO_DIR_Write(PORT1,MASK_IN2,1);
+	GPIO_DIR_Write(PORT5,MASK_IN3,1); // Make motor 2 control pins output
+	GPIO_DIR_Write(PORT5,MASK_IN4,1);
+	
+	
 	GPIO_DIR_Write(PORT1,MASK_SPEED,0); // Make speed sensor pin input
 	
 	GPIO_INTERRUPT->ENF0 |= 1 << 21; // Enable falling interrupt for speed sensor.

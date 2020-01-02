@@ -17,8 +17,8 @@ EN2 = P27 -- P1_6 PWM0_4
 */
 void Motor1_ChangeDirection(MotorDirection direction){
 	if(direction == STOPMOVING){	
-		GPIO_PIN_Write(PORT1,MASK_IN1,1);
-		GPIO_PIN_Write(PORT1,MASK_IN2,1);
+		GPIO_PIN_Write(PORT1,MASK_IN1,0);
+		GPIO_PIN_Write(PORT1,MASK_IN2,0);
 	} else if(direction == COUNTERCLOCKWISE){	
 		GPIO_PIN_Write(PORT1,MASK_IN1,0);
 		GPIO_PIN_Write(PORT1,MASK_IN2,1);
@@ -29,8 +29,8 @@ void Motor1_ChangeDirection(MotorDirection direction){
 }
 void Motor2_ChangeDirection(MotorDirection direction){
 	if(direction == STOPMOVING){	
-		GPIO_PIN_Write(PORT5,MASK_IN3,1);
-		GPIO_PIN_Write(PORT5,MASK_IN4,1);
+		GPIO_PIN_Write(PORT5,MASK_IN3,0);
+		GPIO_PIN_Write(PORT5,MASK_IN4,0);
 	} else if(direction == COUNTERCLOCKWISE){	
 		GPIO_PIN_Write(PORT5,MASK_IN3,0);
 		GPIO_PIN_Write(PORT5,MASK_IN4,1);
