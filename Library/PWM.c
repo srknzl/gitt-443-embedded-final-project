@@ -57,14 +57,14 @@ void PWM_Write(uint32_t T_ON) {
 
 void PWM_ChangeDirection(MotorDirection direction){
 	if(direction == STOPMOVING){	
-		GPIO_PIN_Write(PORT1,MC_IN1,1);
-		GPIO_PIN_Write(PORT1,MC_IN2,1);
+		GPIO_PIN_Write(PORT1,MASK_IN1,1);
+		GPIO_PIN_Write(PORT1,MASK_IN2,1);
 	} else if(direction == COUNTERCLOCKWISE){	
-		GPIO_PIN_Write(PORT1,MC_IN1,0);
-		GPIO_PIN_Write(PORT1,MC_IN2,1);
+		GPIO_PIN_Write(PORT1,MASK_IN1,0);
+		GPIO_PIN_Write(PORT1,MASK_IN2,1);
 	}	else if(direction == CLOCKWISE){
-		GPIO_PIN_Write(PORT1,MC_IN1,1);
-		GPIO_PIN_Write(PORT1,MC_IN2,0);
+		GPIO_PIN_Write(PORT1,MASK_IN1,1);
+		GPIO_PIN_Write(PORT1,MASK_IN2,0);
 	}
 }
 

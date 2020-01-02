@@ -24,5 +24,6 @@ typedef struct {
 	uint32_t turnCount; // Turn count for turning
 } DeviceStatus;
 
+extern DeviceStatus status;
 	
 #endif

@@ -77,69 +77,69 @@ void HM10_SendResponseToUart(){
 		Serial_SendData(); 
 }
 // Communication protocol.
-void HM10_ProcessResponse(DeviceStatus* status){
+void HM10_ProcessResponse(){
 		if(strcmp(HM10Buffer,"STATUS\r\n")==0){
 			HM10_SendCommand("STATUS");
 			HM10_SendCRLN();
-			HM10_SendCommand(getStatusString(status));
+			HM10_SendCommand(getStatusString());
 			HM10_SendCRLN();
 		}else if(strcmp(HM10Buffer,"LEFT\r\n")==0){
 			HM10_SendCommand("LEFT");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "TEST")==0){
-				status->currentOperation = LEFT;
+			if(strcmp(status.opmode, "TEST")==0){
+				status.currentOperation = LEFT;
 				Turn_Left();
 			}
 		}else if(strcmp(HM10Buffer,"RIGHT\r\n")==0){
 			HM10_SendCommand("RIGHT");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "TEST")==0){
-				status->currentOperation = RIGHT;
+			if(strcmp(status.opmode, "TEST")==0){
+				status.currentOperation = RIGHT;
 				Turn_Right();
 			}
 		}else if(strcmp(HM10Buffer,"FORWARD\r\n")==0){
 			HM10_SendCommand("FORWARD");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "TEST")==0){
-				status->currentOperation = FORWARD;
+			if(strcmp(status.opmode, "TEST")==0){
+				status.currentOperation = FORWARD;
 				Move_Forward();
 			}
 		}else if(strcmp(HM10Buffer,"BACK\r\n")==0){
 			HM10_SendCommand("BACK");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "TEST")==0){
-				status->currentOperation = BACKWARD;
+			if(strcmp(status.opmode, "TEST")==0){
+				status.currentOperation = BACKWARD;
 				Move_Backward();
 			}
 		}else if(strcmp(HM10Buffer,"STOP\r\n")==0){
 			HM10_SendCommand("STOP");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "TEST")==0){
-				status->currentOperation = STOP;
+			if(strcmp(status.opmode, "TEST")==0){
+				status.currentOperation = STOP;
 				Stop_Motors();
-				status->willContinue = 0;
+				status.willContinue = 0;
 			}
 		}else if(strcmp(HM10Buffer,"START\r\n")==0){
 			HM10_SendCommand("START");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode,"AUTO")==0){
-				status->started = 1;
+			if(strcmp(status.opmode,"AUTO")==0){
+				status.started = 1;
 			}
 		}else if(strcmp(HM10Buffer,"AUTO\r\n")==0){
 			HM10_SendCommand("AUTO");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "TEST")==0){
+			if(strcmp(status.opmode, "TEST")==0){
 				HM10_SendCommand("AUTONOMOUS");
 				HM10_SendCRLN();
-				status->opmode = "AUTO";
+				status.opmode = "AUTO";
 			}
 		}else if(strcmp(HM10Buffer,"TEST\r\n")==0){
 			HM10_SendCommand("TEST");
 			HM10_SendCRLN();
-			if(strcmp(status->opmode, "AUTO")==0){
+			if(strcmp(status.opmode, "AUTO")==0){
 				HM10_SendCommand("TESTING");
 				HM10_SendCRLN();
-				status->opmode = "TEST";
+				status.opmode = "TEST";
 			}
 		}
 }
@@ -151,13 +151,13 @@ void HM10_SendCRLN(){
 Given status returns a json formatted string that represents the current status of the car
 
 */
-char* getStatusString(DeviceStatus* status){
+char* getStatusString(){
 	//{"distance":5,"light_level_left":150,"light_level_right":200,"op_mode":"AUTO"}
 	snprintf(statusString, 120, "{\"distance\":%u,\"light_level_left\":%u,\"light_level_right\":%u,\"op_mode\":\"%s\"}", 
-	status->distance,
-	status->lightLevelLeft,
-	status->lightLevelRight,
-	status->opmode);
+	status.distance,
+	status.lightLevelLeft,
+	status.lightLevelRight,
+	status.opmode);
 	return statusString;
 }
 

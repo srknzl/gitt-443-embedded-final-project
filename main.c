@@ -14,8 +14,8 @@
 
 char serialReceived[256]; 
 char receivedBlue[256];
+Operations lastOperation;
 DeviceStatus status;
-Operations lastOperation; 
 
 void testUltrasonicWithLeds(){
 	if(status.distance < 7){
@@ -78,7 +78,7 @@ void init() {
 	HM10_SendCRLN();
 	
 	//Initialize GPIO pins
-	GPIO_init(&status);
+	GPIO_init();
 	SysTick_Init();
 }
 
@@ -98,7 +98,7 @@ void update() {
 			HM10NewDataAvailable = 0;
 			if(HM10_ResponseReceived()){  // if last received character is \n
 				//HM10_SendResponseToUart();
-				HM10_ProcessResponse(&status);
+				HM10_ProcessResponse();
 				HM10_ClearBuffer();
 			}
 		}

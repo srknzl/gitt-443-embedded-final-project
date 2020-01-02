@@ -6,8 +6,7 @@ static LED_STATUS LED2_Status = ON;
 static LED_STATUS LED3_Status = BLINK_ON;
 static LED_STATUS LED4_Status = BLINK_OFF;
 
-DeviceStatus* statusref;
-static uint32_t turnTempCounter = 0;
+static uint32_t wheelToothCount = 0;
 
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value) {
 	if(value == 0) {
@@ -38,52 +37,42 @@ void LED2_Init() {
 }
 
 void LED3_Init() {
-	//Write code for initializing LED3.
 	GPIO_DIR_Write(LED3_PORT,LED3_MASK,OUTPUT);
 }
 
 void LED4_Init() {
-	//Write code for initializing LED4.
 	GPIO_DIR_Write(LED4_PORT,LED4_MASK,OUTPUT);
 }
 
 void LED1_Off() {
-	//Write code for turning off LED1.
 	GPIO_PIN_Write(LED1_PORT,LED1_MASK,HIGH);
 }
 
 void LED2_Off() {
-	//Write code for turning off LED2.
 	GPIO_PIN_Write(LED2_PORT,LED2_MASK,HIGH);
 }
 
 void LED3_Off() {
-	//Write code for turning off LED3.
 	GPIO_PIN_Write(LED3_PORT,LED3_MASK,LOW);
 }
 
 void LED4_Off() {
-	//Write code for turning off LED4.
 	GPIO_PIN_Write(LED4_PORT,LED4_MASK,LOW);
 }
 
 void LED1_On() {
-	//Write code for turning on LED1.
 	GPIO_PIN_Write(LED1_PORT,LED1_MASK,LOW);
 }
 
 void LED2_On() {
-	//Write code for turning on LED2.
 	GPIO_PIN_Write(LED2_PORT,LED2_MASK,LOW);
 }
 
 void LED3_On() {
-	//Write code for turning on LED3.
 	GPIO_PIN_Write(LED3_PORT,LED3_MASK,HIGH);
 }
 
 void LED4_On() {
-	//Write code for turning on LED4.
 	GPIO_PIN_Write(LED4_PORT,LED4_MASK,HIGH);
 }
 
@@ -103,23 +92,22 @@ void LED4_Blink() {
 	LED4_Status = BLINK_ON;
 }
 
-void GPIO_init(DeviceStatus* s){
-	statusref = s;
+void GPIO_init(){
+
 	IOCON_P1_23 &= ~7;
 	IOCON_P1_24 &= ~7;
 	IOCON_P0_21 &= ~7;
 	
-	GPIO_DIR_Write(PORT1,MC_IN1,1);
-	GPIO_DIR_Write(PORT1,MC_IN2,1);
-	GPIO_DIR_Write(PORT1,MC_SPEED,0);
+	GPIO_DIR_Write(PORT1,MASK_IN1,1); // Make motor control pins output
+	GPIO_DIR_Write(PORT1,MASK_IN2,1);
+	GPIO_DIR_Write(PORT1,MASK_SPEED,0); // Make speed sensor pin input
 	
-	GPIO_ENR_PORT0 |= 1 << 21;
-	GPIO_ENF_PORT0 |= 1 << 21;
+	GPIO_INTERRUPT->ENF0 |= 1 << 21; // Enable falling interrupt for speed sensor.
+	
 	NVIC_EnableIRQ(GPIO_IRQn);
-	//GPIO_ADDRESS
 		
-	//initializes the motor
-	PORT1->PIN|=  (1 << 24) | (1 << 23);
+	
+	PORT1->PIN|=  (1 << 24) | (1 << 23); //initialize the motor
 }
 
 // TODO: check variable names
@@ -171,18 +159,12 @@ void update_LEDs() {
 }
 
 void GPIO_IRQHandler(){
-	uint32_t fallingStatus, risingStatus;
-	fallingStatus = GPIO_FALLING_INTERRUPT_STATUS_PORT0;
-	risingStatus = GPIO_RISING_INTERRUPT_STATUS_PORT0;
-	if((fallingStatus & SPEEDSENSOR_MASK) > 0){
-		GPIO_CLEAR_INTERRUPT_PORT0 |= SPEEDSENSOR_MASK;
-		turnTempCounter++;
-		if(turnTempCounter == 6){
-			statusref->turnCount++;
-			turnTempCounter = 0;
+	if((GPIO_INTERRUPT->STATF0 & MASK_SPEED) > 0){ // If speed sensor's falling interrupt 
+		GPIO_INTERRUPT->CLR0 |= MASK_SPEED; // Clear the interrput first
+		wheelToothCount++; // Increase wheel tooth count
+		if(wheelToothCount == 6){ // The wheel has 6 tooth
+			status.turnCount++; // If tooth count is 6 increase turn count by 1
+			wheelToothCount = 0; // Reset wheel tooth count 
 		}
-	}else if((risingStatus & SPEEDSENSOR_MASK) > 0){
-		GPIO_CLEAR_INTERRUPT_PORT0 |= SPEEDSENSOR_MASK;
-		
 	}
 }

@@ -15,6 +15,21 @@ typedef struct
   volatile  uint32_t CLR;
 } GPIO_TypeDef;
 
+typedef struct {
+  volatile	uint32_t STATUS;
+	volatile 	uint32_t STATR0;
+	volatile 	uint32_t STATF0;
+	volatile 	uint32_t CLR0;
+	volatile 	uint32_t ENR0;
+	volatile 	uint32_t ENF0;
+						uint32_t RESERVED0[3];
+  volatile	uint32_t STATR2;
+  volatile	uint32_t STATF2;
+  volatile	uint32_t CLR2;
+  volatile 	uint32_t ENR2;
+	volatile 	uint32_t ENF2;
+} GPIOInterrupt_TypeDef;
+
 typedef enum {
 	INPUT = 0,
 	OUTPUT = 1
@@ -33,14 +48,7 @@ typedef enum {
 } LED_STATUS;
 
 #define GPIO_ADDRESS	0x20098000
-
-#define GPIO_RISING_INTERRUPT_STATUS_PORT0 *((volatile uint32_t*)(0x40028084))
-#define GPIO_FALLING_INTERRUPT_STATUS_PORT0 *((volatile uint32_t*)(0x40028088))
-#define GPIO_ENR_PORT0 *((volatile uint32_t*)(0x40028090)) 
-#define GPIO_ENF_PORT0 *((volatile uint32_t*)(0x40028094)) 
-#define GPIO_CLEAR_INTERRUPT_PORT0 *((volatile uint32_t*)(0x4002808C)) 
-
-#define SPEEDSENSOR_MASK 1<<21
+#define GPIO_INTERRUPT_ADDRESS 0x40028000
 
 #define PORT0	((GPIO_TypeDef*) PORT0_BASE)
 #define PORT1	((GPIO_TypeDef*) PORT1_BASE)
@@ -48,6 +56,8 @@ typedef enum {
 #define PORT3	((GPIO_TypeDef*) PORT3_BASE)
 #define PORT4	((GPIO_TypeDef*) PORT4_BASE)
 #define PORT5	((GPIO_TypeDef*) PORT5_BASE)
+
+#define GPIO_INTERRUPT ((GPIOInterrupt_TypeDef*) GPIO_INTERRUPT_ADDRESS)
 
 #define PORT0_BASE		(GPIO_ADDRESS + 0x000)
 #define PORT1_BASE		(GPIO_ADDRESS + 0x020)
@@ -73,9 +83,9 @@ typedef enum {
 #define IOCON_P1_23 *((volatile uint32_t*)(0x4002C0DC))
 #define IOCON_P1_24 *((volatile uint32_t*)(0x4002C0E0))
 	
-#define MC_IN1 (1 << 23)
-#define MC_IN2 (1 << 24)
-#define MC_SPEED (1 << 21)
+#define MASK_IN1 ((uint32_t) 1 << 23)
+#define MASK_IN2 ((uint32_t) 1 << 24)
+#define MASK_SPEED ((uint32_t) 1 << 21)
 
 void GPIO_DIR_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);
 void GPIO_PIN_Write(GPIO_TypeDef* PORT,uint32_t MASK,uint8_t value);
@@ -103,6 +113,6 @@ void LED4_Blink(void);
 
 void update_LEDs(void);
 
-void GPIO_init(DeviceStatus* status);
+void GPIO_init(void);
 
 #endif
