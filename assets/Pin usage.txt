@@ -6,9 +6,15 @@ P9 Rx Hm10 -- P0_0
 P17 LDR Left Analog in -- P0_25
 P19 Potentiometer Analog in -- P1_30
 P20 LDR Right Analog in -- P1_31
-For Motor controller:
-IN1 = P5
-IN2 = P6
-EN1 = P28
 
-P21 Speed sensor
+
+For Motor 1 controller:
+IN1 = P5 -- P1_23
+IN2 = P6 -- P1_24
+EN1 = P28 -- P1_5 PWM0_3
+
+For Motor 2 controller:
+
+IN3 = P39 -- P5_0
+IN4 = P38 -- P5_1
+EN2 = P27 -- P1_6 PWM0_4

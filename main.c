@@ -76,7 +76,8 @@ void init() {
 	status.willContinue = 0;
 	status.turnCount = 0;
 	
-	Change_Speed(0);
+	Change_Motor1_Speed(0);
+	Change_Motor2_Speed(0);
 	
 	HM10_SendCommand("TESTING");
 	HM10_SendCRLN();
@@ -115,7 +116,8 @@ void update() {
 		
 		if(ADC_New_Speed_Available){
 			status.speed = (ADC_Get_Last_Speed()*100) / 4095;
-			Change_Speed(status.speed);
+			Change_Motor1_Speed(status.speed);
+			Change_Motor2_Speed(status.speed);
 		}
 		
 		if(ADC_New_Left_Light_Available){

@@ -30,8 +30,12 @@ typedef struct
 } PWM_TypeDef;
 
 
-#define IOCON_MOTOR1_SPEED_ADDRESS	0x4002C094
+#define IOCON_MOTOR1_SPEED_ADDRESS	0x4002C094  // P1_5
 #define IOCON_MOTOR1_SPEED	*((volatile uint32_t*)(IOCON_MOTOR1_SPEED_ADDRESS))
+
+#define IOCON_MOTOR2_SPEED_ADDRESS	0x4002C098  // P1_6 
+#define IOCON_MOTOR2_SPEED	*((volatile uint32_t*)(IOCON_MOTOR2_SPEED_ADDRESS))
+
 
 #define PWM0_BASE	0x40014000
 #define PWM1_BASE	0x40018000
@@ -43,6 +47,7 @@ typedef struct
 
 void PWM_Init(void);
 void PWM_Cycle_Rate(uint32_t period_In_Cycles);
-void PWM_Write(uint32_t T_ON);
+void PWM_Write_Motor2(uint32_t T_ON);
+void PWM_Write_Motor1(uint32_t T_ON);
 
 #endif

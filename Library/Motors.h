@@ -17,7 +17,8 @@ void Move_Backward(void);
 void Turn_Left(void);
 void Turn_Right(void);
 void Stop_Motors(void);
-void Change_Speed(uint32_t speed);
+void Change_Motor1_Speed(uint32_t speed);
+void Change_Motor2_Speed(uint32_t speed);
 
 
 #endif
