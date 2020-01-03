@@ -29,8 +29,8 @@ typedef struct {
 	LED_STATUS LED4_Status;
 } DeviceStatus;
 
-#define LIGHT_THRESHOLD 200 
-#define TURN_COUNT_FOR_90 6
+#define LIGHT_THRESHOLD 280
+#define TURN_COUNT_FOR_90 5
 extern DeviceStatus status;
 	
 #endif

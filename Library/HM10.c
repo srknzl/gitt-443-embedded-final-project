@@ -138,11 +138,16 @@ void HM10_ProcessResponse(){
 			HM10_SendCRLN();
 			if(strcmp(status.opmode,"AUTO")==0){
 				status.started = 1;
+				Move_Forward();
 			}
 		}else if(strcmp(HM10Buffer,"AUTO\r\n")==0){
 			HM10_SendCommand("AUTO");
 			HM10_SendCRLN();
 			if(strcmp(status.opmode, "TEST")==0){
+				status.currentOperation = STOP;
+				Stop_Motors();
+				status.willContinue = 0;
+				CarLEDs_stop();
 				HM10_SendCommand("AUTONOMOUS");
 				HM10_SendCRLN();
 				status.opmode = "AUTO";
@@ -150,7 +155,13 @@ void HM10_ProcessResponse(){
 		}else if(strcmp(HM10Buffer,"TEST\r\n")==0){
 			HM10_SendCommand("TEST");
 			HM10_SendCRLN();
+			status.currentOperation = STOP;
+			Stop_Motors();
+			status.willContinue = 0;
+			CarLEDs_stop();
+			status.started =0;
 			if(strcmp(status.opmode, "AUTO")==0){
+				
 				HM10_SendCommand("TESTING");
 				HM10_SendCRLN();
 				status.opmode = "TEST";
@@ -169,6 +180,7 @@ char* getStatusString(){
 	//{"distance":5,"light_level_left":150,"light_level_right":200,"op_mode":"AUTO"}
 	snprintf(statusString, 120, "{\"distance\":%u,\"light_level_left\":%u,\"light_level_right\":%u,\"op_mode\":\"%s\"}", 
 	status.distance,
+	//(uint32_t) (5.0 + (70.0 / (1 + pow(2.718281828459, ((5.0 - status.distance) / 3.0))))),
 	status.lightLevelLeft,
 	status.lightLevelRight,
 	status.opmode);

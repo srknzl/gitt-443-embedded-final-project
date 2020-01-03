@@ -46,7 +46,6 @@ typedef struct
 #define PWMX 	((PWM_TypeDef*) 0x40014000)
 
 void PWM_Init(void);
-void PWM_Cycle_Rate(uint32_t period_In_Cycles);
 void PWM_Write_Motor2(uint32_t T_ON);
 void PWM_Write_Motor1(uint32_t T_ON);
 

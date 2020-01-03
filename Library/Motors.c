@@ -1,6 +1,7 @@
 #include "Motors.h"
 #include "GPIO.h"
 #include "PWM.h"
+#include "Datastructures.h"
 
 /* 
 For Motor 1 controller:
@@ -66,8 +67,15 @@ void Stop_Motors(){
 	Motor2_ChangeDirection(STOPMOVING);
 }
 void Change_Motor1_Speed(uint32_t speed){
-	PWM_Write_Motor1(100-speed);
+	if(speed > 100) {
+		speed = 100;
+	}
+	PWM_Write_Motor1(100-(speed*status.speed /100));
 }
 void Change_Motor2_Speed(uint32_t speed){
-	PWM_Write_Motor2(100-speed);
+	if(speed > 100) {
+		speed = 100;
+	}
+	
+	PWM_Write_Motor2(100-(speed*status.speed /100));
 }
