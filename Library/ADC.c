@@ -10,7 +10,9 @@ uint8_t ADC_New_Right_Light_Available = 0;
 uint8_t ADC_New_Speed_Available = 0;
 
 
-
+/*
+Desc: Inits ADC, 3 measurements are done in ADC, potentiometer for speed, and left and right ldrs for light
+*/
 void ADC_Init() {
 	uint32_t temp;
 	Timer0_Init(); // Initialize timer 0 for adc 
@@ -52,29 +54,30 @@ void ADC_Init() {
 	//Enable ADC_IRQn (Interrupt Request).
 	NVIC_EnableIRQ(ADC_IRQn);
 }
-
 /*
-void ADC_Start () {
-	uint32_t temp;
-	temp = ADC->CR;
-	temp |= (1<<26);
-	temp &= ~(1<<24 | 1<<25);
-	ADC->CR = temp;
-}
+Desc: Gives last left light value
 */
 uint32_t ADC_Get_Last_Left_Light() {
 	ADC_New_Left_Light_Available = 0;
 	return ADC_Last_Light_Left;
 }
+/*
+Desc: Gives last right light value 
+*/
 uint32_t ADC_Get_Last_Right_Light() {
 	ADC_New_Right_Light_Available = 0;
 	return ADC_Last_Light_Right;
 }
+/*
+Desc: Gives last speed value 
+*/
 uint32_t ADC_Get_Last_Speed() {
 	ADC_New_Speed_Available = 0;
 	return ADC_Last_Speed;
 }
-
+/*
+Desc: Determines which channel is caused the interrupt and writes data accordingly
+*/
 void ADC_IRQHandler() {
 	uint8_t channel;
 	uint32_t conversionStatus, mask;

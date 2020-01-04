@@ -48,7 +48,9 @@ void Serial_Init() {
 	//Set UART0_IRQn Priority to 5.
 	NVIC_SetPriority(UART0_IRQn, 5);
 }
-
+/*
+Desc: If reading interrupt change received char, and make available 1. If writing, write next char
+*/
 void UART0_IRQHandler() {	
 	
 	uint32_t currentInterrupt = ((LPC_UART0->IIR >> 1) & 7);
@@ -70,16 +72,22 @@ void UART0_IRQHandler() {
 		}
 	}
 }
-
+/*
+Desc: Read a char
+*/
 char Serial_ReadData() {
 	return Serial_UART->RBR;
 }
-
+/*
+Desc: Send a char
+*/
 void Serial_WriteData(const char data) {
 	serialTransmitCompleted = 0;
 	Serial_UART->THR = data;
 }
-
+/*
+Desc: Send string that is in serialTransmitData 
+*/
 void Serial_SendData(){
 	while(*serialTransmitData){
 		Serial_WriteData(*serialTransmitData++);
@@ -87,18 +95,22 @@ void Serial_SendData(){
 	}
 }
 /*
-Indicates if response character sequence is ended. Last character is always \r in putty.
+Desc: Indicates if response character sequence is ended. Last character is always \r in putty.
 which is sent when enter key is pressed.
 */
 uint8_t Serial_ResponseReceived(){
 	return serialReceivedCharacter == '\r';
 }
-
+/*
+Desc: Send \r\n to uart
+*/
 void Serial_SendCRLN(){
 	serialTransmitData = "\r\n";
 	Serial_SendData();
 }
-
+/*
+Desc: Send a string to uart
+*/
 void Serial_SendString(char * data){
 	serialTransmitData = data;
 	Serial_SendData();

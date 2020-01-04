@@ -3,7 +3,9 @@
 #include "DataStructures.h"
 #include "SystemStructures.h"
 
-
+/*
+Desc: Init PWM for motor 1 and 2 
+*/
 void PWM_Init() {
 	uint32_t  temp;
 	PCONP |= (1 << 5); // Turn on PWM0
@@ -32,13 +34,17 @@ void PWM_Init() {
 	PWMX->TCR = (1 << 0 | 1 << 3); // Start PWM counters
 	
 }
-
+/*
+Desc: Changes PWM cycle rate
+*/
 void PWM_Cycle_Rate(uint32_t period_In_Cycles) {
 	//Write a formula that changes the MR0 register value for a given parameter.
 	PWMX->MR0 = period_In_Cycles *6000;
 	PWMX->LER |= 1 << 0;
 }
-
+/*
+Desc: Changes motor 1 speed
+*/
 void PWM_Write_Motor1(uint32_t T_ON) {	
 	
 	int temp;
@@ -51,6 +57,9 @@ void PWM_Write_Motor1(uint32_t T_ON) {
 	//Enable PWM Match Register Latch.
 	PWMX->LER |= 1 << 3;
 }
+/*
+Desc: Changes motor 2 speed 
+*/
 void PWM_Write_Motor2(uint32_t T_ON) {	
 	
 	int temp;

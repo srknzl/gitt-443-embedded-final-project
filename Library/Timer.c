@@ -1,5 +1,8 @@
 #include "Timer.h"
 #include "SystemStructures.h"
+/*
+Desc: Init Timer0 
+*/
 void Timer0_Init() {
 	TIMER_PIN_IOCON &= ~(0x07);
 	TIMER_PIN_IOCON |= 0x03;

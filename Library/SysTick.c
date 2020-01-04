@@ -3,7 +3,9 @@
 #include "GPIO.h"
 
 static uint32_t on = 1;
-
+/*
+Desc: Init systick for blinking leds
+*/
 void SysTick_Init() {
 	// enables the system tick counter and its interrupt
 	// also sets CCLK as the clksource
@@ -19,7 +21,9 @@ void SysTick_Init() {
 	NVIC_SetPriority(SysTick_IRQn, 10);
 	NVIC_ClearPendingIRQ(SysTick_IRQn);
 }
-
+/*
+Desc: Update leds states twice a second  
+*/
 void SysTick_Handler() {
 	update_LEDs();
 }

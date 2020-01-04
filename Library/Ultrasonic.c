@@ -10,12 +10,16 @@ uint8_t ultrasonicSensorNewDataAvailable = 0;
 
 uint8_t ultrasonicSensorTriggerStart = 0;
 uint8_t ultrasonicSensorCaptureRisingEdge = 0;
-
+/*
+Desc: Ultrasonic iocon init
+*/
 void Ultrasonic_Init() {
 	IOCON_TRIGGER |= 0x03;
 	IOCON_ECHO |= 0x03;
 }
-
+/*
+Desc: Ultrasonic Trigger init, inits Timer2
+*/
 void Ultrasonic_Trigger_Timer_Init() {
 	//Turn on Timer2.
 	PCONP |= 1<<22;
@@ -36,7 +40,9 @@ void Ultrasonic_Trigger_Timer_Init() {
 	
 	NVIC_ClearPendingIRQ(TIMER2_IRQn);
 }
-
+/*
+Desc: Inits Timer3 and capture func
+*/
 void Ultrasonic_Capture_Timer_Init() {
 	//Turn on Timer3
 	PCONP |= 1<<23; 
@@ -59,7 +65,9 @@ void Ultrasonic_Capture_Timer_Init() {
 
 	NVIC_EnableIRQ(TIMER3_IRQn);
 }
-
+/*
+Desc: Starts Trigger timer 
+*/
 void Ultrasonic_Start_Trigger_Timer() {
 	//Change output value of Trigger Pin as HIGH
 	GPIO_PIN_Write(PORT0, 1<<9, 1);
@@ -72,7 +80,9 @@ void Ultrasonic_Start_Trigger_Timer() {
 	//Enable Timer Counter and Prescale Counter for counting.
 	TIMER2->TCR |= 1<<0;
 }
-
+/*
+Desc: Trigger interrupt, ensures periodic triggers
+*/
 void TIMER2_IRQHandler() {
 	//Write HIGH bit value to IR Register for Corresponding Interrupt
 	TIMER2->IR |= 1<<3;
@@ -88,7 +98,9 @@ void TIMER2_IRQHandler() {
 		ultrasonicSensorTriggerStart = 0;
 	}
 }
-
+/*
+Desc: Capture interrupt, captures the time between rising an falling interrupts 
+*/
 void TIMER3_IRQHandler() {
 	TIMER3->IR = 1 << 5;
 	
