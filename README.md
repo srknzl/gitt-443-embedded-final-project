@@ -1,6 +1,9 @@
 # Project: Gitt
 Cmpe 443 Embedded Car Repository
 
+<img src="./assets/car.png" alt="car" width="600" height="800"/>
+
+
 A wall follower manuel/autonomous car project in Bogazici University as a group of 4 students, İsmet Dağlı, Sadullah Gültekin,  Bahadır Hocamoğlu and Serkan Özel.
 
 * Our report: https://www.overleaf.com/read/bsyfttpcrbtv
